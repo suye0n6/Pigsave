@@ -13,7 +13,6 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
-          // 스크롤 가능하도록 설정함
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(

@@ -1,0 +1,42 @@
+name: pigsave
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Cupertino Icons 패키지 (iOS 스타일 아이콘)
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # Flutter Lints 패키지 (코딩 규칙)
+  flutter_lints: ^5.0.0
+
+# Flutter에서 사용할 패키지들에 대한 설정
+flutter:
+  # 로컬 폰트 폴더 설정
+  assets:
+    - assets/fonts/
+
+  # 폰트 설정 (Pretendard 폰트)
+  fonts:
+    - family: Pretendard
+      fonts:
+        - asset: assets/fonts/Pretendard-Bold.ttf
+        - asset: assets/fonts/Pretendard-Regular.ttf
+          weight: 700
+    - family: YOnepick
+      fonts:
+        - asset: assets/fonts/YOnepick-Bold.ttf
+
+  # Material 디자인을 사용 (기본 UI 디자인)
+  uses-material-design: true

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pigsave/screen/LoginJoin.dart'; // 회원가입 화면 import
+import 'package:pigsave/screen/Home.dart'; // 홈 화면 import
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -99,9 +101,20 @@ class _LoginBoxState extends State<LoginBox> {
           const SizedBox(height: 10),
           _buildTextField('비밀번호', '비밀번호를 입력해주세요'),
           const SizedBox(height: 28),
+
+          // 로그인 버튼
           GestureDetector(
             onTap: () {
               print('로그인 버튼 클릭');
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    print('HomeScreen으로 이동');
+                    return const HomeScreen(); // HomeScreen으로 이동
+                  },
+                ),
+              );
             },
             child: Container(
               width: 328,
@@ -125,10 +138,12 @@ class _LoginBoxState extends State<LoginBox> {
             ),
           ),
           const SizedBox(height: 20),
+
+          // 회원가입 이동
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text(
+            children: [
+              const Text(
                 '아직 회원이 아니시라면?',
                 style: TextStyle(
                   color: Color(0xFFB3B3B3),
@@ -139,16 +154,30 @@ class _LoginBoxState extends State<LoginBox> {
                   letterSpacing: -1,
                 ),
               ),
-              SizedBox(width: 6),
-              Text(
-                '회원가입',
-                style: TextStyle(
-                  color: Color(0xFF1A1A1A),
-                  fontSize: 14,
-                  fontFamily: 'Pretendard',
-                  fontWeight: FontWeight.w400,
-                  height: 1,
-                  letterSpacing: -1,
+              const SizedBox(width: 6),
+              GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onTap: () {
+                  print('회원가입 클릭');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        print('LoginJoin 페이지로 이동');
+                        return const LoginJoin();
+                      },
+                    ),
+                  );
+                },
+                child: const Text(
+                  '회원가입',
+                  style: TextStyle(
+                    color: Color(0xFF1A1A1A),
+                    fontSize: 14,
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.w400,
+                    height: 1,
+                  ),
                 ),
               ),
             ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screen/Login.dart'; // Login 화면 import
+import 'screen/Login.dart'; // Login 화면 import 및 클릭 이벤트 구현
 
 void main() {
   runApp(const MyApp());

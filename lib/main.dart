@@ -32,7 +32,7 @@ class _ControlState extends State<Control> {
   void initState() {
     super.initState();
 
-    // 화면이 완전히 빌드된 후에 LoginScreen으로 이동
+    // 화면이 완전히 빌드된 후에 LoginScreen으로 이동 후 슬로우 걸기
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Navigator.pushReplacement(
         context,

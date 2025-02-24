@@ -25,7 +25,21 @@ class _HomeScreenState extends State<HomeScreen> {
             Expanded(
               // ✅ 빈 공간을 차지하여 overflow 방지
               // 홈 바텀 위젯 오버플로우 수정
-              child: Center(child: HomeWeidget()),
+              child: Stack(
+                children: [
+                  Center(
+                    child: HomeWeidget(), // 메인 콘텐츠 (중앙 정렬)
+                  ),
+                  Positioned(
+                    bottom: 0, // 화면의 하단에 고정
+                    left: 0,
+                    right: 0, // 가로로 꽉 차게
+                    child: SizedBox(
+                      child: Navbar(), // 하단 고정 Navbar
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -431,6 +445,179 @@ class _HomeWeidgetState extends State<HomeWeidget> {
                       ),
                     ),
                   ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class Navbar extends StatefulWidget {
+  const Navbar({super.key});
+
+  @override
+  State<Navbar> createState() => _NavbarState();
+}
+
+class _NavbarState extends State<Navbar> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          width: 360,
+          height: 72,
+          clipBehavior: Clip.antiAlias,
+          decoration: ShapeDecoration(
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(16),
+                topRight: Radius.circular(16),
+              ),
+            ),
+          ),
+          child: Stack(
+            children: [
+              Positioned(
+                left: 32,
+                top: 4,
+                child: Container(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 30,
+                              height: 30,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(),
+                              child: FlutterLogo(), //로고 삽입
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              '홉',
+                              style: TextStyle(
+                                color: Color(0xFFFE8295),
+                                fontSize: 14,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w600,
+                                height: 1.20,
+                                letterSpacing: -0.14,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 48),
+                      Container(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 30,
+                              height: 30,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(),
+                              child: FlutterLogo(), //로고 삽입
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              '자동 급이',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Color(0xFFB3B3B3),
+                                fontSize: 14,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w600,
+                                height: 1.20,
+                                letterSpacing: -0.14,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 48),
+                      Container(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 30,
+                              height: 30,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(),
+                              child: Center(
+                                child: IconButton(
+                                  icon: Icon(Icons.person),
+                                  onPressed: () {
+                                    // 클릭 시 실행할 코드
+                                  },
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              '내 정보',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Color(0xFFB3B3B3),
+                                fontSize: 14,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w600,
+                                height: 1.20,
+                                letterSpacing: -0.14,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 48),
+                      Container(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 30,
+                              height: 30,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(),
+                              child: FlutterLogo(), //로고 삽입
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              '설정',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Color(0xFFB3B3B3),
+                                fontSize: 14,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w600,
+                                height: 1.20,
+                                letterSpacing: -0.14,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

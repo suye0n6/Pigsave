@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  flutter_svg: ^2.0.10+1
   # Cupertino Icons 패키지 (iOS 스타일 아이콘)
   cupertino_icons: ^1.0.8
 
@@ -26,6 +26,11 @@ flutter:
   # 로컬 폰트 폴더 설정
   assets:
     - assets/fonts/
+    - assets/images/
+    - assets/images/scan.svg
+    - assets/images/Pignose.svg
+    - assets/images/Pignose2.svg
+
 
   # 폰트 설정 (Pretendard 폰트)
   fonts:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,11 +17,14 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 24),
-            Hometitle(), // 🟢 태그 인식 컨테이너
+            Padding(
+              padding: const EdgeInsets.only(left: 16), // ✅ 왼쪽에 16px 여백 추가
+              child: Hometitle(), // 🟢 태그 인식 컨테이너
+            ),
             SizedBox(height: 32),
             Expanded(
               // ✅ 빈 공간을 차지하여 overflow 방지
-              child: Center(child: Homewidget()),
+              child: Center(child: HomeWeidget()),
             ),
           ],
         ),
@@ -42,19 +46,19 @@ class _HometitleState extends State<Hometitle> {
     return Column(
       children: [
         Container(
-          width: 230,
+          width: 300,
           height: 34,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 '은우 농장 1구역',
                 style: TextStyle(
                   color: Color(0xFF1A1A1A),
                   fontSize: 24,
-                  fontFamily: 'Pretnedard',
+                  fontFamily: 'Pretendard',
                   fontWeight: FontWeight.w700,
                   height: 1.40,
                   letterSpacing: -0.24,
@@ -80,7 +84,7 @@ class _HometitleState extends State<Hometitle> {
                     Text(
                       '변경',
                       style: TextStyle(
-                        color: Color(0xFF4C4C4c),
+                        color: Color(0xFF4C4C4C),
                         fontSize: 14,
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w400,
@@ -99,14 +103,14 @@ class _HometitleState extends State<Hometitle> {
   }
 }
 
-class Homewidget extends StatefulWidget {
-  const Homewidget({super.key});
+class HomeWeidget extends StatefulWidget {
+  const HomeWeidget({super.key});
 
   @override
-  State<Homewidget> createState() => _HomewidgetState();
+  State<HomeWeidget> createState() => _HomeWeidgetState();
 }
 
-class _HomewidgetState extends State<Homewidget> {
+class _HomeWeidgetState extends State<HomeWeidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -182,7 +186,7 @@ class _HomewidgetState extends State<Homewidget> {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
                                   '280',
@@ -196,7 +200,7 @@ class _HomewidgetState extends State<Homewidget> {
                                   ),
                                 ),
                                 Text(
-                                  '미리 급이 중',
+                                  '마리 급이 중',
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 20,
@@ -256,7 +260,7 @@ class _HomewidgetState extends State<Homewidget> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      width: 57,
+                      width: 157,
                       height: double.infinity,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 12,
@@ -276,7 +280,7 @@ class _HomewidgetState extends State<Homewidget> {
                         children: [
                           Container(
                             width: double.infinity,
-                            height: 80,
+                            height: 48,
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -309,6 +313,7 @@ class _HomewidgetState extends State<Homewidget> {
                                         color: Color(0xFF8C8C8C),
                                         fontSize: 14,
                                         fontFamily: 'Pretendard',
+                                        fontWeight: FontWeight.w400,
                                         height: 1.40,
                                         letterSpacing: -0.14,
                                       ),
@@ -318,8 +323,12 @@ class _HomewidgetState extends State<Homewidget> {
                               ],
                             ),
                           ),
-                          const SizedBox(height: 48),
-                          Container(width: 44, height: 44, child: Stack()),
+
+                          Container(
+                            width: 44,
+                            height: 48,
+                            child: SvgPicture.asset('assets/images/scan.svg'),
+                          ),
                         ],
                       ),
                     ),
@@ -395,12 +404,23 @@ class _HomewidgetState extends State<Homewidget> {
                             child: Stack(
                               children: [
                                 Positioned(
+                                  left: 0,
+                                  top: 0,
+                                  child: Image.asset(
+                                    'assets/images/Pignose.svg', // 여기에 이미지를 추가
+                                    width: 50,
+                                    height: 50,
+                                  ),
+                                ),
+                                Positioned(
                                   left: 14.89,
                                   top: 18.29,
                                   child: Container(
-                                    width: 30.28,
+                                    width: 30.82,
                                     height: 12.67,
-                                    child: FlutterLogo(),
+                                    child: SvgPicture.asset(
+                                      'assets/images/Pignose2.svg',
+                                    ),
                                   ),
                                 ),
                               ],

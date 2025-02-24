@@ -24,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: 32),
             Expanded(
               // ✅ 빈 공간을 차지하여 overflow 방지
+              // 홈 바텀 위젯 오버플로우 수정
               child: Center(child: HomeWeidget()),
             ),
           ],

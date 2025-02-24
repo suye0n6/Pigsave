@@ -400,28 +400,28 @@ class _HomeWeidgetState extends State<HomeWeidget> {
                           ),
                           const SizedBox(height: 48),
                           Container(
-                            width: 60,
-                            height: 47,
+                            width: 100,
+                            height: 47, // 높이를 50으로 변경
                             child: Stack(
+                              clipBehavior: Clip.none, // 오버플로우 허용
                               children: [
                                 Positioned(
                                   left: 0,
                                   top: 0,
-                                  child: Image.asset(
-                                    'assets/images/Pignose.svg', // 여기에 이미지를 추가
+                                  child: SvgPicture.asset(
+                                    'assets/images/Pignose.svg',
                                     width: 50,
                                     height: 50,
+                                    allowDrawingOutsideViewBox: true,
                                   ),
                                 ),
                                 Positioned(
                                   left: 14.89,
                                   top: 18.29,
-                                  child: Container(
+                                  child: SvgPicture.asset(
+                                    'assets/images/Pignose2.svg',
                                     width: 30.82,
                                     height: 12.67,
-                                    child: SvgPicture.asset(
-                                      'assets/images/Pignose2.svg',
-                                    ),
                                   ),
                                 ),
                               ],

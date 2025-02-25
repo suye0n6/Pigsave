@@ -503,7 +503,7 @@ class _NavbarState extends State<Navbar> {
                               clipBehavior: Clip.antiAlias,
                               decoration: BoxDecoration(),
                               child: SvgPicture.asset(
-                                'assets/images/scan.svg',
+                                'assets/images/gite.svg',
                               ), //로고 삽입
                             ),
                             const SizedBox(height: 4),
@@ -533,7 +533,9 @@ class _NavbarState extends State<Navbar> {
                               height: 30,
                               clipBehavior: Clip.antiAlias,
                               decoration: BoxDecoration(),
-                              child: FlutterLogo(), //로고 삽입
+                              child: SvgPicture.asset(
+                                'assets/images/pig_nose.svg',
+                              ), //로고 삽입
                             ),
                             const SizedBox(height: 4),
                             Text(
@@ -563,7 +565,9 @@ class _NavbarState extends State<Navbar> {
                               height: 30,
                               clipBehavior: Clip.antiAlias,
                               decoration: BoxDecoration(),
-                              child: FlutterLogo(), //로고 삽입
+                              child: SvgPicture.asset(
+                                'assets/images/person.svg',
+                              ), //로고 삽입
                             ),
                             const SizedBox(height: 4),
                             Text(
@@ -593,7 +597,9 @@ class _NavbarState extends State<Navbar> {
                               height: 30,
                               clipBehavior: Clip.antiAlias,
                               decoration: BoxDecoration(),
-                              child: FlutterLogo(), //로고 삽입
+                              child: SvgPicture.asset(
+                                'assets/images/settings.svg',
+                              ), //로고 삽입
                             ),
                             const SizedBox(height: 4),
                             Text(

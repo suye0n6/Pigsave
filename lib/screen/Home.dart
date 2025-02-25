@@ -502,7 +502,9 @@ class _NavbarState extends State<Navbar> {
                               height: 30,
                               clipBehavior: Clip.antiAlias,
                               decoration: BoxDecoration(),
-                              child: FlutterLogo(), //로고 삽입
+                              child: SvgPicture.asset(
+                                'assets/images/scan.svg',
+                              ), //로고 삽입
                             ),
                             const SizedBox(height: 4),
                             Text(
@@ -561,14 +563,7 @@ class _NavbarState extends State<Navbar> {
                               height: 30,
                               clipBehavior: Clip.antiAlias,
                               decoration: BoxDecoration(),
-                              child: Center(
-                                child: IconButton(
-                                  icon: Icon(Icons.person),
-                                  onPressed: () {
-                                    // 클릭 시 실행할 코드
-                                  },
-                                ),
-                              ),
+                              child: FlutterLogo(), //로고 삽입
                             ),
                             const SizedBox(height: 4),
                             Text(

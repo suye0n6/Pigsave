@@ -198,7 +198,9 @@ class _ModalTitleState extends State<ModalTitle> {
                       child: Container(
                         width: 32,
                         height: 32,
-                        decoration: BoxDecoration(color: Color(0xFFD9D9D9)),
+                        child: SvgPicture.asset(
+                          'assets/images/close.svg',
+                        ), //로고 삽입,
                       ),
                     ),
                   ],
@@ -209,7 +211,6 @@ class _ModalTitleState extends State<ModalTitle> {
         ),
       ],
     );
-    ;
   }
 }
 
@@ -226,8 +227,8 @@ class _ModalWidgetState extends State<ModalWidget> {
     return Column(
       children: [
         Container(
-          width: 329,
-          height: 270,
+          width: 340,
+          height: 300,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -297,9 +298,9 @@ class _ModalWidgetState extends State<ModalWidget> {
                                         child: Container(
                                           width: 16,
                                           height: 16,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xFFD9D9D9),
-                                          ),
+                                          child: SvgPicture.asset(
+                                            'assets/images/location_on.svg',
+                                          ), //로고 삽입,
                                         ),
                                       ),
                                     ],
@@ -334,7 +335,7 @@ class _ModalWidgetState extends State<ModalWidget> {
                   top: 16,
                   left: 20,
                   right: 142,
-                  bottom: 14,
+                  bottom: 12,
                 ),
                 clipBehavior: Clip.antiAlias,
                 decoration: ShapeDecoration(
@@ -391,9 +392,9 @@ class _ModalWidgetState extends State<ModalWidget> {
                                         child: Container(
                                           width: 16,
                                           height: 16,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xFFD9D9D9),
-                                          ),
+                                          child: SvgPicture.asset(
+                                            'assets/images/location_on.svg',
+                                          ), //로고 삽입,
                                         ),
                                       ),
                                     ],
@@ -428,7 +429,7 @@ class _ModalWidgetState extends State<ModalWidget> {
                   top: 16,
                   left: 20,
                   right: 142,
-                  bottom: 14,
+                  bottom: 12,
                 ),
                 clipBehavior: Clip.antiAlias,
                 decoration: ShapeDecoration(
@@ -485,9 +486,9 @@ class _ModalWidgetState extends State<ModalWidget> {
                                         child: Container(
                                           width: 16,
                                           height: 16,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xFFD9D9D9),
-                                          ),
+                                          child: SvgPicture.asset(
+                                            'assets/images/location_on.svg',
+                                          ), //로고 삽입,
                                         ),
                                       ),
                                     ],

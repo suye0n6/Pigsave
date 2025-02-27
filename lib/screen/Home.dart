@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pigsave/screen/PigManagement.dart';
 import 'package:pigsave/screen/PigQr.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -521,7 +522,6 @@ class _ModalWidgetState extends State<ModalWidget> {
         ),
       ],
     );
-    ;
   }
 }
 
@@ -759,40 +759,50 @@ class _HomeWeidgetState extends State<HomeWeidget> {
                         Container(
                           width: double.infinity,
                           height: 48,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                width: double.infinity,
-                                child: Text(
-                                  '돼지 관리',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w700,
-                                    height: 1.40,
-                                    letterSpacing: -0.20,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PigMange(),
+                                ),
+                              );
+                            },
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: Text(
+                                    '돼지 관리',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      fontFamily: 'Pretendard',
+                                      fontWeight: FontWeight.w700,
+                                      height: 1.40,
+                                      letterSpacing: -0.20,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                width: double.infinity,
-                                child: Text(
-                                  '돼지 추가, 삭제',
-                                  style: TextStyle(
-                                    color: Color(0xFF8C8C8C),
-                                    fontSize: 14,
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w400,
-                                    height: 1.40,
-                                    letterSpacing: -0.14,
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: Text(
+                                    '돼지 추가, 삭제',
+                                    style: TextStyle(
+                                      color: Color(0xFF8C8C8C),
+                                      fontSize: 14,
+                                      fontFamily: 'Pretendard',
+                                      fontWeight: FontWeight.w400,
+                                      height: 1.40,
+                                      letterSpacing: -0.14,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                         Container(

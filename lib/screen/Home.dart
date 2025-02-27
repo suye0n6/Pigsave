@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pigsave/screen/Myhome.dart';
 import 'package:pigsave/screen/PigManagement.dart';
 import 'package:pigsave/screen/PigQr.dart';
+import 'package:pigsave/screen/Pigfood.dart';
+import 'package:pigsave/screen/setting.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -882,130 +885,174 @@ class _NavbarState extends State<Navbar> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 30,
-                              height: 30,
-                              clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(),
-                              child: SvgPicture.asset(
-                                'assets/images/gite.svg',
-                              ), //로고 삽입
+                      // Home Button
+                      GestureDetector(
+                        onTap: () {
+                          // '홈' 클릭 시 HomePage로 이동
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomeScreen(),
                             ),
-                            const SizedBox(height: 4),
-                            Text(
-                              '홈',
-                              style: TextStyle(
-                                color: Color(0xFFFE8295),
-                                fontSize: 14,
-                                fontFamily: 'Pretendard',
-                                fontWeight: FontWeight.w600,
-                                height: 1.20,
-                                letterSpacing: -0.14,
+                          );
+                        },
+                        child: Container(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 30,
+                                height: 30,
+                                clipBehavior: Clip.antiAlias,
+                                decoration: BoxDecoration(),
+                                child: SvgPicture.asset(
+                                  'assets/images/gite.svg',
+                                ), // 로고 삽입
                               ),
-                            ),
-                          ],
+                              const SizedBox(height: 4),
+                              Text(
+                                '홈',
+                                style: TextStyle(
+                                  color: Color(0xFFFE8295),
+                                  fontSize: 14,
+                                  fontFamily: 'Pretendard',
+                                  fontWeight: FontWeight.w600,
+                                  height: 1.20,
+                                  letterSpacing: -0.14,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       const SizedBox(width: 48),
-                      Container(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 30,
-                              height: 30,
-                              clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(),
-                              child: SvgPicture.asset(
-                                'assets/images/pig_nose.svg',
-                              ), //로고 삽입
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              '자동 급이',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Color(0xFFB3B3B3),
-                                fontSize: 14,
-                                fontFamily: 'Pretendard',
-                                fontWeight: FontWeight.w600,
-                                height: 1.20,
-                                letterSpacing: -0.14,
+                      // Feeding Button
+                      GestureDetector(
+                        onTap: () {
+                          // '자동 급이' 클릭 시 FeedingPage로 이동
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Pigfood()),
+                          );
+                        },
+                        child: Container(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 30,
+                                height: 30,
+                                clipBehavior: Clip.antiAlias,
+                                decoration: BoxDecoration(),
+                                child: SvgPicture.asset(
+                                  'assets/images/pig_nose.svg',
+                                ), // 로고 삽입
                               ),
-                            ),
-                          ],
+                              const SizedBox(height: 4),
+                              Text(
+                                '자동 급이',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Color(0xFFB3B3B3),
+                                  fontSize: 14,
+                                  fontFamily: 'Pretendard',
+                                  fontWeight: FontWeight.w600,
+                                  height: 1.20,
+                                  letterSpacing: -0.14,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       const SizedBox(width: 48),
-                      Container(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 30,
-                              height: 30,
-                              clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(),
-                              child: SvgPicture.asset(
-                                'assets/images/person.svg',
-                              ), //로고 삽입
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              '내 정보',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Color(0xFFB3B3B3),
-                                fontSize: 14,
-                                fontFamily: 'Pretendard',
-                                fontWeight: FontWeight.w600,
-                                height: 1.20,
-                                letterSpacing: -0.14,
+                      // Profile Button
+                      GestureDetector(
+                        onTap: () {
+                          // '내 정보' 클릭 시 ProfilePage로 이동
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Myhome()),
+                          );
+                        },
+                        child: Container(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 30,
+                                height: 30,
+                                clipBehavior: Clip.antiAlias,
+                                decoration: BoxDecoration(),
+                                child: SvgPicture.asset(
+                                  'assets/images/person.svg',
+                                ), // 로고 삽입
                               ),
-                            ),
-                          ],
+                              const SizedBox(height: 4),
+                              Text(
+                                '내 정보',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Color(0xFFB3B3B3),
+                                  fontSize: 14,
+                                  fontFamily: 'Pretendard',
+                                  fontWeight: FontWeight.w600,
+                                  height: 1.20,
+                                  letterSpacing: -0.14,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       const SizedBox(width: 48),
-                      Container(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 30,
-                              height: 30,
-                              clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(),
-                              child: SvgPicture.asset(
-                                'assets/images/settings.svg',
-                              ), //로고 삽입
+                      // Settings Button
+                      GestureDetector(
+                        onTap: () {
+                          // '설정' 클릭 시 SettingsPage로 이동
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SettingPage(),
                             ),
-                            const SizedBox(height: 4),
-                            Text(
-                              '설정',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Color(0xFFB3B3B3),
-                                fontSize: 14,
-                                fontFamily: 'Pretendard',
-                                fontWeight: FontWeight.w600,
-                                height: 1.20,
-                                letterSpacing: -0.14,
+                          );
+                        },
+                        child: Container(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 30,
+                                height: 30,
+                                clipBehavior: Clip.antiAlias,
+                                decoration: BoxDecoration(),
+                                child: SvgPicture.asset(
+                                  'assets/images/settings.svg',
+                                ), // 로고 삽입
                               ),
-                            ),
-                          ],
+                              const SizedBox(height: 4),
+                              Text(
+                                '설정',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Color(0xFFB3B3B3),
+                                  fontSize: 14,
+                                  fontFamily: 'Pretendard',
+                                  fontWeight: FontWeight.w600,
+                                  height: 1.20,
+                                  letterSpacing: -0.14,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],

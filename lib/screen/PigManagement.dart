@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pigsave/screen/Home.dart';
+import 'package:pigsave/screen/PigQr.dart';
 
 class PigMange extends StatefulWidget {
   const PigMange({super.key});
@@ -12,36 +14,41 @@ class _PigMangeState extends State<PigMange> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(height: 16),
-              Mantitle(),
-              SizedBox(height: 16),
-              Row(
+      body: Stack(
+        clipBehavior: Clip.none, // Stack의 경계를 벗어난 위젯을 잘리지 않도록 설정
+        children: [
+          Positioned(
+            left: MediaQuery.of(context).size.width / 2 - 177, // 중앙 정렬
+            top: 100, // 적절히 올려서 위치 조정
+            child: Manback(),
+          ),
+          Center(
+            child: SingleChildScrollView(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Mantemp(),
-                  SizedBox(width: 16), // Mantemp와 Manheart 사이에 16px 간격 추가
-                  Manheart(),
+                  SizedBox(height: 16),
+                  Mantitle(),
+                  SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [Mantemp(), SizedBox(width: 16), Manheart()],
+                  ),
+                  SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [Manmove(), SizedBox(width: 16), Manair()],
+                  ),
+                  SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [Manstress(), SizedBox(width: 16), Manempty()],
+                  ),
                 ],
               ),
-              SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [Manmove(), SizedBox(width: 16), Manair()],
-              ),
-              SizedBox(height: 16), // Manmove와 Manair 사이에 16px 간격 추가
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [Manstress(), SizedBox(width: 16), Manempty()],
-              ),
-              // Manmove 바로 아래에 Manstress 배치
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -64,10 +71,21 @@ class _ManbackState extends State<Manback> {
           height: 28,
           child: Stack(
             children: [
-              Container(
-                width: 28,
-                height: 28,
-                child: SvgPicture.asset('assets/images/arrow_left_alt.svg'),
+              GestureDetector(
+                onTap: () {
+                  // 새로운 페이지로 이동
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomeScreen(), // NextPage()는 이동할 페이지
+                    ),
+                  );
+                },
+                child: Container(
+                  width: 28,
+                  height: 28,
+                  child: SvgPicture.asset('assets/images/arrow_left_alt.svg'),
+                ),
               ),
             ],
           ),
@@ -107,44 +125,50 @@ class _MantitleState extends State<Mantitle> {
                   children: [
                     SizedBox(
                       width: 168,
-                      child: SizedBox(
-                        child: Text(
-                          '모돈',
-                          style: TextStyle(
-                            color: Color(0xFF8C8C8C),
-                            fontSize: 14,
-                            fontFamily: 'Pretendard',
-                            fontWeight: FontWeight.w400,
-                            height: 1,
-                            letterSpacing: -1,
-                          ),
+                      child: Text(
+                        '모돈',
+                        style: TextStyle(
+                          color: Color(0xFF8C8C8C),
+                          fontSize: 14,
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w400,
+                          height: 1,
+                          letterSpacing: -1,
                         ),
                       ),
                     ),
                     SizedBox(
                       width: 168,
-                      child: SizedBox(
-                        width: 168,
-                        child: Text(
-                          'P381931',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 24,
-                            fontFamily: 'Pretendard',
-                            fontWeight: FontWeight.w700,
-                            height: 1.40,
-                            letterSpacing: -0.24,
-                          ),
+                      child: Text(
+                        'P381931',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 24,
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w700,
+                          height: 1.40,
+                          letterSpacing: -0.24,
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
-              Container(
-                width: 32,
-                height: 32,
-                child: SvgPicture.asset('assets/images/scan.svg'),
+              GestureDetector(
+                onTap: () {
+                  // 스캔 버튼을 클릭하면 다른 페이지로 이동
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Pigtag(), // ScanPage()는 이동할 페이지
+                    ),
+                  );
+                },
+                child: Container(
+                  width: 32,
+                  height: 32,
+                  child: SvgPicture.asset('assets/images/scan.svg'),
+                ),
               ),
             ],
           ),
@@ -187,11 +211,13 @@ class _MantempState extends State<Mantemp> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Row에서 Text와 아이콘이 크기를 적절히 가질 수 있도록 수정
               Container(
-                width: 153,
+                width: double.infinity,
                 height: 24,
                 child: Row(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisSize:
+                      MainAxisSize.max, // MainAxisSize.max로 설정하여 크기 조정
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -206,24 +232,23 @@ class _MantempState extends State<Mantemp> {
                         letterSpacing: -1,
                       ),
                     ),
-                    Container(
-                      width: 24,
-                      height: 24,
-                      child: Stack(
-                        children: [
-                          Container(
-                            width: 24,
-                            height: 24,
-                            child: SvgPicture.asset('assets/images/info.svg'),
-                          ),
-                        ],
+                    GestureDetector(
+                      onTap: () {
+                        // 사진 클릭 시 모달 창 띄우기
+                        _showInfoDialog(context);
+                      },
+                      child: Container(
+                        width: 24, // 명시적인 크기 지정
+                        height: 24, // 명시적인 크기 지정
+                        child: SvgPicture.asset('assets/images/info.svg'),
                       ),
                     ),
                   ],
                 ),
               ),
+              // 텍스트와 온도가 표시된 Container
               Container(
-                width: 81,
+                width: double.infinity,
                 height: 58,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -242,10 +267,10 @@ class _MantempState extends State<Mantemp> {
                       ),
                     ),
                     Container(
-                      width: 81,
+                      width: double.infinity,
                       height: 32,
                       child: Row(
-                        mainAxisSize: MainAxisSize.min,
+                        mainAxisSize: MainAxisSize.min, // 자식 크기를 최소화
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -283,6 +308,55 @@ class _MantempState extends State<Mantemp> {
       ],
     );
   }
+
+  // 모달 창을 띄우는 함수
+  void _showInfoDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true, // 배경을 클릭하면 닫히도록 설정
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: EdgeInsets.all(10),
+          content: Container(
+            width: 200,
+            height: 200,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  '돼지의 적정 온도는?',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  '38.5 ~ 39.5℃가 적정한 체온입니다.',
+                  style: TextStyle(
+                    color: Color(0xFFB3B3B3),
+                    fontSize: 12,
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.w200,
+                    height: 1,
+                    letterSpacing: -1,
+                  ),
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(); // 모달 창 닫기
+                  },
+                  child: Text('닫기'),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 }
 
 class Manheart extends StatefulWidget {
@@ -318,11 +392,13 @@ class _ManheartState extends State<Manheart> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Row에서 Text와 아이콘이 크기를 적절히 가질 수 있도록 수정
               Container(
-                width: 153,
+                width: double.infinity,
                 height: 24,
                 child: Row(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisSize:
+                      MainAxisSize.max, // MainAxisSize.max로 설정하여 크기 조정
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -337,24 +413,23 @@ class _ManheartState extends State<Manheart> {
                         letterSpacing: -1,
                       ),
                     ),
-                    Container(
-                      width: 24,
-                      height: 24,
-                      child: Stack(
-                        children: [
-                          Container(
-                            width: 24,
-                            height: 24,
-                            child: SvgPicture.asset('assets/images/info.svg'),
-                          ),
-                        ],
+                    GestureDetector(
+                      onTap: () {
+                        // 사진 클릭 시 모달 창 띄우기
+                        _showInfoDialog(context);
+                      },
+                      child: Container(
+                        width: 24, // 명시적인 크기 지정
+                        height: 24, // 명시적인 크기 지정
+                        child: SvgPicture.asset('assets/images/info.svg'),
                       ),
                     ),
                   ],
                 ),
               ),
+              // 텍스트와 온도가 표시된 Container
               Container(
-                width: 81,
+                width: double.infinity,
                 height: 58,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -373,10 +448,10 @@ class _ManheartState extends State<Manheart> {
                       ),
                     ),
                     Container(
-                      width: 81,
+                      width: double.infinity,
                       height: 32,
                       child: Row(
-                        mainAxisSize: MainAxisSize.min,
+                        mainAxisSize: MainAxisSize.min, // 자식 크기를 최소화
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
@@ -392,7 +467,7 @@ class _ManheartState extends State<Manheart> {
                             ),
                           ),
                           Text(
-                            'bpm',
+                            '회',
                             style: TextStyle(
                               color: Color(0xFFB3B3B3),
                               fontSize: 16,
@@ -412,6 +487,55 @@ class _ManheartState extends State<Manheart> {
           ),
         ),
       ],
+    );
+  }
+
+  // 모달 창을 띄우는 함수
+  void _showInfoDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true, // 배경을 클릭하면 닫히도록 설정
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: EdgeInsets.all(10),
+          content: Container(
+            width: 200,
+            height: 200,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  '돼지의 적정 심박수는?',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  '분당 70~120회입니다.',
+                  style: TextStyle(
+                    color: Color(0xFFB3B3B3),
+                    fontSize: 12,
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.w200,
+                    height: 1,
+                    letterSpacing: -1,
+                  ),
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(); // 모달 창 닫기
+                  },
+                  child: Text('닫기'),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -449,11 +573,13 @@ class _ManmoveState extends State<Manmove> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Row에서 Text와 아이콘이 크기를 적절히 가질 수 있도록 수정
               Container(
-                width: 153,
+                width: double.infinity,
                 height: 24,
                 child: Row(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisSize:
+                      MainAxisSize.max, // MainAxisSize.max로 설정하여 크기 조정
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -468,24 +594,23 @@ class _ManmoveState extends State<Manmove> {
                         letterSpacing: -1,
                       ),
                     ),
-                    Container(
-                      width: 24,
-                      height: 24,
-                      child: Stack(
-                        children: [
-                          Container(
-                            width: 24,
-                            height: 24,
-                            child: SvgPicture.asset('assets/images/info.svg'),
-                          ),
-                        ],
+                    GestureDetector(
+                      onTap: () {
+                        // 사진 클릭 시 모달 창 띄우기
+                        _showInfoDialog(context);
+                      },
+                      child: Container(
+                        width: 24, // 명시적인 크기 지정
+                        height: 24, // 명시적인 크기 지정
+                        child: SvgPicture.asset('assets/images/info.svg'),
                       ),
                     ),
                   ],
                 ),
               ),
+              // 텍스트와 온도가 표시된 Container
               Container(
-                width: 81,
+                width: double.infinity,
                 height: 58,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -504,10 +629,10 @@ class _ManmoveState extends State<Manmove> {
                       ),
                     ),
                     Container(
-                      width: 81,
+                      width: double.infinity,
                       height: 32,
                       child: Row(
-                        mainAxisSize: MainAxisSize.min,
+                        mainAxisSize: MainAxisSize.min, // 자식 크기를 최소화
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
@@ -545,6 +670,55 @@ class _ManmoveState extends State<Manmove> {
       ],
     );
   }
+
+  // 모달 창을 띄우는 함수
+  void _showInfoDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true, // 배경을 클릭하면 닫히도록 설정
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: EdgeInsets.all(10),
+          content: Container(
+            width: 200,
+            height: 200,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  '돼지의 적정 활동량은?',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  '보통의 돼지 1000~3000보, 어미돈은 3000~5000보입니다.',
+                  style: TextStyle(
+                    color: Color(0xFFB3B3B3),
+                    fontSize: 12,
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.w200,
+                    height: 1,
+                    letterSpacing: -1,
+                  ),
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(); // 모달 창 닫기
+                  },
+                  child: Text('닫기'),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 }
 
 class Manair extends StatefulWidget {
@@ -580,11 +754,13 @@ class _ManairState extends State<Manair> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Row에서 Text와 아이콘이 크기를 적절히 가질 수 있도록 수정
               Container(
-                width: 153,
+                width: double.infinity,
                 height: 24,
                 child: Row(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisSize:
+                      MainAxisSize.max, // MainAxisSize.max로 설정하여 크기 조정
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -599,24 +775,23 @@ class _ManairState extends State<Manair> {
                         letterSpacing: -1,
                       ),
                     ),
-                    Container(
-                      width: 24,
-                      height: 24,
-                      child: Stack(
-                        children: [
-                          Container(
-                            width: 24,
-                            height: 24,
-                            child: SvgPicture.asset('assets/images/info.svg'),
-                          ),
-                        ],
+                    GestureDetector(
+                      onTap: () {
+                        // 사진 클릭 시 모달 창 띄우기
+                        _showInfoDialog(context);
+                      },
+                      child: Container(
+                        width: 24, // 명시적인 크기 지정
+                        height: 24, // 명시적인 크기 지정
+                        child: SvgPicture.asset('assets/images/info.svg'),
                       ),
                     ),
                   ],
                 ),
               ),
+              // 텍스트와 온도가 표시된 Container
               Container(
-                width: 81,
+                width: double.infinity,
                 height: 58,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -624,9 +799,9 @@ class _ManairState extends State<Manair> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '위험',
+                      '정상',
                       style: TextStyle(
-                        color: Color(0xFFF90000),
+                        color: Color(0xFF1BD446),
                         fontSize: 16,
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w400,
@@ -635,15 +810,15 @@ class _ManairState extends State<Manair> {
                       ),
                     ),
                     Container(
-                      width: 81,
+                      width: double.infinity,
                       height: 32,
                       child: Row(
-                        mainAxisSize: MainAxisSize.min,
+                        mainAxisSize: MainAxisSize.min, // 자식 크기를 최소화
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            '5',
+                            '16',
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 32,
@@ -674,6 +849,55 @@ class _ManairState extends State<Manair> {
           ),
         ),
       ],
+    );
+  }
+
+  // 모달 창을 띄우는 함수
+  void _showInfoDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true, // 배경을 클릭하면 닫히도록 설정
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: EdgeInsets.all(10),
+          content: Container(
+            width: 200,
+            height: 200,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  '돼지의 적정 분당 호흡수는?',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  '일반적으로 정상 환경조건에서 큰 돼지는 보통 분당 20회 정도, 작은 돼지는 분당 30~40회 정도가 입니다.',
+                  style: TextStyle(
+                    color: Color(0xFFB3B3B3),
+                    fontSize: 12,
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.w200,
+                    height: 1,
+                    letterSpacing: -1,
+                  ),
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(); // 모달 창 닫기
+                  },
+                  child: Text('닫기'),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -711,11 +935,13 @@ class _ManstressState extends State<Manstress> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Row에서 Text와 아이콘이 크기를 적절히 가질 수 있도록 수정
               Container(
-                width: 153,
+                width: double.infinity,
                 height: 24,
                 child: Row(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisSize:
+                      MainAxisSize.max, // MainAxisSize.max로 설정하여 크기 조정
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -730,24 +956,23 @@ class _ManstressState extends State<Manstress> {
                         letterSpacing: -1,
                       ),
                     ),
-                    Container(
-                      width: 24,
-                      height: 24,
-                      child: Stack(
-                        children: [
-                          Container(
-                            width: 24,
-                            height: 24,
-                            child: SvgPicture.asset('assets/images/info.svg'),
-                          ),
-                        ],
+                    GestureDetector(
+                      onTap: () {
+                        // 사진 클릭 시 모달 창 띄우기
+                        _showInfoDialog(context);
+                      },
+                      child: Container(
+                        width: 24, // 명시적인 크기 지정
+                        height: 24, // 명시적인 크기 지정
+                        child: SvgPicture.asset('assets/images/info.svg'),
                       ),
                     ),
                   ],
                 ),
               ),
+              // 텍스트와 온도가 표시된 Container
               Container(
-                width: 81,
+                width: double.infinity,
                 height: 58,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -755,15 +980,15 @@ class _ManstressState extends State<Manstress> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      width: 81,
+                      width: double.infinity,
                       height: 32,
                       child: Row(
-                        mainAxisSize: MainAxisSize.min,
+                        mainAxisSize: MainAxisSize.min, // 자식 크기를 최소화
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            '16',
+                            '안정적',
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 32,
@@ -771,17 +996,6 @@ class _ManstressState extends State<Manstress> {
                               fontWeight: FontWeight.w600,
                               height: 1,
                               letterSpacing: 0.32,
-                            ),
-                          ),
-                          Text(
-                            '회',
-                            style: TextStyle(
-                              color: Color(0xFFB3B3B3),
-                              fontSize: 16,
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w700,
-                              height: 1,
-                              letterSpacing: -1,
                             ),
                           ),
                         ],
@@ -794,6 +1008,55 @@ class _ManstressState extends State<Manstress> {
           ),
         ),
       ],
+    );
+  }
+
+  // 모달 창을 띄우는 함수
+  void _showInfoDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true, // 배경을 클릭하면 닫히도록 설정
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: EdgeInsets.all(10),
+          content: Container(
+            width: 200,
+            height: 200,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  '돼지의 적정 스트레스 지수는?',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  '분당 70~120회입니다.',
+                  style: TextStyle(
+                    color: Color(0xFFB3B3B3),
+                    fontSize: 12,
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.w200,
+                    height: 1,
+                    letterSpacing: -1,
+                  ),
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(); // 모달 창 닫기
+                  },
+                  child: Text('닫기'),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pigsave/screen/PigQr.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -672,186 +673,160 @@ class _HomeWeidgetState extends State<HomeWeidget> {
                 ),
               ),
               const SizedBox(height: 20),
-              Container(
-                width: double.infinity,
-                height: 175,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 157,
-                      height: double.infinity,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 16,
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      decoration: ShapeDecoration(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: double.infinity,
-                            height: 48,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  width: double.infinity,
-                                  child: SizedBox(
-                                    width: double.infinity,
-                                    child: Text(
-                                      '태그 인식',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontFamily: 'Pretendard',
-                                        fontWeight: FontWeight.w700,
-                                        height: 1.40,
-                                        letterSpacing: -0.20,
-                                      ),
-                                    ),
+              Row(
+                // Row 추가
+                children: [
+                  Container(
+                    width: 157,
+                    height: 175,
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          height: 48,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: double.infinity,
+                                child: Text(
+                                  '태그 인식',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontFamily: 'Pretendard',
+                                    fontWeight: FontWeight.w700,
+                                    height: 1.40,
+                                    letterSpacing: -0.20,
                                   ),
                                 ),
-                                SizedBox(
-                                  width: double.infinity,
-                                  child: SizedBox(
-                                    width: double.infinity,
-                                    child: Text(
-                                      '돼지 별 정보 확인',
-                                      style: TextStyle(
-                                        color: Color(0xFF8C8C8C),
-                                        fontSize: 14,
-                                        fontFamily: 'Pretendard',
-                                        fontWeight: FontWeight.w400,
-                                        height: 1.40,
-                                        letterSpacing: -0.14,
-                                      ),
-                                    ),
+                              ),
+                              SizedBox(
+                                width: double.infinity,
+                                child: Text(
+                                  '돼지 별 정보 확인',
+                                  style: TextStyle(
+                                    color: Color(0xFF8C8C8C),
+                                    fontSize: 14,
+                                    fontFamily: 'Pretendard',
+                                    fontWeight: FontWeight.w400,
+                                    height: 1.40,
+                                    letterSpacing: -0.14,
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-
-                          Container(
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Pigtag()),
+                            );
+                          },
+                          child: Container(
                             width: 44,
                             height: 48,
                             child: SvgPicture.asset('assets/images/scan.svg'),
                           ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: 14),
-                    Container(
-                      width: 157,
-                      height: 175,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 16,
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      decoration: ShapeDecoration(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
                         ),
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: double.infinity,
-                            height: 48,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  width: double.infinity,
-                                  child: SizedBox(
-                                    width: double.infinity,
-                                    child: Text(
-                                      '돼지 관리',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontFamily: 'Pretendard',
-                                        fontWeight: FontWeight.w700,
-                                        height: 1.40,
-                                        letterSpacing: -0.20,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: double.infinity,
-                                  child: SizedBox(
-                                    width: double.infinity,
-                                    child: Text(
-                                      '돼지 추가, 삭제',
-                                      style: TextStyle(
-                                        color: Color(0xFF8C8C8C),
-                                        fontSize: 14,
-                                        fontFamily: 'Pretendard',
-                                        fontWeight: FontWeight.w400,
-                                        height: 1.40,
-                                        letterSpacing: -0.14,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 48),
-                          Container(
-                            width: 100,
-                            height: 47, // 높이를 50으로 변경
-                            child: Stack(
-                              clipBehavior: Clip.none, // 오버플로우 허용
-                              children: [
-                                Positioned(
-                                  left: 0,
-                                  top: 0,
-                                  child: SvgPicture.asset(
-                                    'assets/images/Pignose.svg',
-                                    width: 50,
-                                    height: 50,
-                                    allowDrawingOutsideViewBox: true,
-                                  ),
-                                ),
-                                Positioned(
-                                  left: 14.89,
-                                  top: 18.29,
-                                  child: SvgPicture.asset(
-                                    'assets/images/Pignose2.svg',
-                                    width: 30.82,
-                                    height: 12.67,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(width: 14),
+                  Container(
+                    width: 157,
+                    height: 175,
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          height: 48,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: double.infinity,
+                                child: Text(
+                                  '돼지 관리',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontFamily: 'Pretendard',
+                                    fontWeight: FontWeight.w700,
+                                    height: 1.40,
+                                    letterSpacing: -0.20,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: double.infinity,
+                                child: Text(
+                                  '돼지 추가, 삭제',
+                                  style: TextStyle(
+                                    color: Color(0xFF8C8C8C),
+                                    fontSize: 14,
+                                    fontFamily: 'Pretendard',
+                                    fontWeight: FontWeight.w400,
+                                    height: 1.40,
+                                    letterSpacing: -0.14,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          width: 100,
+                          height: 47,
+                          child: Stack(
+                            clipBehavior: Clip.none,
+                            children: [
+                              Positioned(
+                                left: 0,
+                                top: 0,
+                                child: SvgPicture.asset(
+                                  'assets/images/Pignose.svg',
+                                  width: 50,
+                                  height: 50,
+                                  allowDrawingOutsideViewBox: true,
+                                ),
+                              ),
+                              Positioned(
+                                left: 14.89,
+                                top: 18.29,
+                                child: SvgPicture.asset(
+                                  'assets/images/Pignose2.svg',
+                                  width: 30.82,
+                                  height: 12.67,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

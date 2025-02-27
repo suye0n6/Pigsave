@@ -191,7 +191,7 @@ class _MailCheckState extends State<MailCheck> {
                   ],
                 ),
               ),
-              const SizedBox(height: 16), //여기를 16으로 하고 싶은데 16으로 하면 바텀 부족이 떠
+              const SizedBox(height: 16),
               Container(
                 height: 72,
                 child: Column(

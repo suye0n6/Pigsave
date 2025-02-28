@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pigsave/screen/Home.dart';
 import 'package:pigsave/screen/Myhome.dart';
-import 'package:pigsave/screen/Pigfoods.dart';
+import 'package:pigsave/screen/Pigfood.dart';
 import 'package:pigsave/screen/setting.dart';
 
-class Pigfood extends StatefulWidget {
-  const Pigfood({super.key});
+class Pigfoods extends StatefulWidget {
+  const Pigfoods({super.key});
 
   @override
-  State<Pigfood> createState() => _PigfoodState();
+  State<Pigfoods> createState() => _PigfoodsState();
 }
 
-class _PigfoodState extends State<Pigfood> {
+class _PigfoodsState extends State<Pigfoods> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +34,7 @@ class _PigfoodState extends State<Pigfood> {
                     top: 32, // This positions FoodMain 32px below FoodButton
                     left: 0,
                     right: 0,
-                    child: Center(child: FoodMain()),
+                    child: Center(child: Sfoodmain()),
                   ),
                   Positioned(
                     bottom: 0,
@@ -48,111 +48,6 @@ class _PigfoodState extends State<Pigfood> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class FoodMain extends StatefulWidget {
-  const FoodMain({super.key});
-
-  @override
-  State<FoodMain> createState() => _FoodMainState();
-}
-
-class _FoodMainState extends State<FoodMain> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: 328,
-          height: 74,
-          padding: const EdgeInsets.only(
-            bottom: 16,
-          ), // Add padding below to avoid clipping
-          decoration: BoxDecoration(
-            border: Border(
-              bottom: BorderSide(
-                width: 1,
-                color: Color(0xFFE6E6E6),
-              ), // Only bottom border
-            ),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                width: 124,
-                height: 58,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '하루 급여량(한 마리당)',
-                      style: TextStyle(
-                        color: Color(0xFF999999),
-                        fontSize: 14,
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w400,
-                        height: 1.40,
-                        letterSpacing: -0.14,
-                      ),
-                    ),
-                    Text(
-                      '3.2kg',
-                      style: TextStyle(
-                        color: Color(0xFF1A1A1A),
-                        fontSize: 32,
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w600,
-                        height: 1,
-                        letterSpacing: 0.32,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                width: 90,
-                height: 36,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 8,
-                ),
-                decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(width: 1, color: Color(0xFFFE8295)),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      '급여량 변경',
-                      style: TextStyle(
-                        color: Color(0xFFFE8295),
-                        fontSize: 14,
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w400,
-                        height: 1.40,
-                        letterSpacing: -0.14,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }
@@ -192,7 +87,6 @@ class _FoodButtonState extends State<FoodButton> {
                   vertical: 4,
                 ),
                 decoration: ShapeDecoration(
-                  color: Color(0xFFFE8295),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -205,7 +99,7 @@ class _FoodButtonState extends State<FoodButton> {
                     Text(
                       '일괄 급여',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         fontSize: 14,
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w400,
@@ -232,6 +126,7 @@ class _FoodButtonState extends State<FoodButton> {
                     vertical: 4,
                   ),
                   decoration: ShapeDecoration(
+                    color: Color(0xFFFE8295),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -244,7 +139,7 @@ class _FoodButtonState extends State<FoodButton> {
                       Text(
                         '특별 급여',
                         style: TextStyle(
-                          color: Color(0xFF1A1A1A),
+                          color: Colors.white,
                           fontSize: 14,
                           fontFamily: 'Pretendard',
                           fontWeight: FontWeight.w400,
@@ -260,6 +155,317 @@ class _FoodButtonState extends State<FoodButton> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class Sfoodmain extends StatefulWidget {
+  const Sfoodmain({super.key});
+
+  @override
+  State<Sfoodmain> createState() => _SfoodmainState();
+}
+
+class _SfoodmainState extends State<Sfoodmain> {
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            width: 328,
+            height: 134,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 104,
+                  height: 134,
+                  padding: const EdgeInsets.only(
+                    top: 14,
+                    left: 12,
+                    right: 12,
+                    bottom: 18,
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  decoration: ShapeDecoration(
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'P12914',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Color(0xFF7F7F7F),
+                                fontSize: 16,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w400,
+                                height: 1.40,
+                                letterSpacing: 0.16,
+                              ),
+                            ),
+                            Text(
+                              '3.7KG',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w700,
+                                height: 1.40,
+                                letterSpacing: -0.20,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 6,
+                        ),
+                        decoration: ShapeDecoration(
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              width: 1,
+                              color: Color(0xFFFE8295),
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              '급여량 변경',
+                              style: TextStyle(
+                                color: Color(0xFFFE8295),
+                                fontSize: 12,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w400,
+                                height: 1.40,
+                                letterSpacing: -0.12,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Container(
+                  width: 104,
+                  height: 134,
+                  padding: const EdgeInsets.only(
+                    top: 14,
+                    left: 12,
+                    right: 12,
+                    bottom: 18,
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  decoration: ShapeDecoration(
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'P12914',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Color(0xFF7F7F7F),
+                                fontSize: 16,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w400,
+                                height: 1.40,
+                                letterSpacing: 0.16,
+                              ),
+                            ),
+                            Text(
+                              '3.7KG',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w700,
+                                height: 1.40,
+                                letterSpacing: -0.20,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 6,
+                        ),
+                        decoration: ShapeDecoration(
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              width: 1,
+                              color: Color(0xFFFE8295),
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              '급여량 변경',
+                              style: TextStyle(
+                                color: Color(0xFFFE8295),
+                                fontSize: 12,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w400,
+                                height: 1.40,
+                                letterSpacing: -0.12,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Container(
+                  width: 104,
+                  height: 134,
+                  padding: const EdgeInsets.only(
+                    top: 14,
+                    left: 12,
+                    right: 12,
+                    bottom: 18,
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  decoration: ShapeDecoration(
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'P12914',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Color(0xFF7F7F7F),
+                                fontSize: 16,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w400,
+                                height: 1.40,
+                                letterSpacing: 0.16,
+                              ),
+                            ),
+                            Text(
+                              '3.7KG',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w700,
+                                height: 1.40,
+                                letterSpacing: -0.20,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 6,
+                        ),
+                        decoration: ShapeDecoration(
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              width: 1,
+                              color: Color(0xFFFE8295),
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              '급여량 변경',
+                              style: TextStyle(
+                                color: Color(0xFFFE8295),
+                                fontSize: 12,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w400,
+                                height: 1.40,
+                                letterSpacing: -0.12,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

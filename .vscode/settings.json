@@ -1,0 +1,8 @@
+{
+    "workbench.settings.useSplitJSON": true
+}
+{
+    "dart.flutterHotReloadOnSave": true,
+    "flutter.showStructuredErrors": true
+  }
+  

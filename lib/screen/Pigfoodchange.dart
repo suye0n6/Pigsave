@@ -1,55 +1,148 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'dart:ui'; // dart:ui 임포트
 import 'package:pigsave/screen/Home.dart';
 import 'package:pigsave/screen/Myhome.dart';
-import 'package:pigsave/screen/Pigfoodchange.dart';
+import 'package:pigsave/screen/Pigfood.dart';
 import 'package:pigsave/screen/Pigfoods.dart';
 import 'package:pigsave/screen/setting.dart';
 
-class Pigfood extends StatefulWidget {
-  const Pigfood({super.key});
+class Pigfoodchange extends StatefulWidget {
+  const Pigfoodchange({super.key});
 
   @override
-  State<Pigfood> createState() => _PigfoodState();
+  State<Pigfoodchange> createState() => _PigfoodchangeState();
 }
 
-class _PigfoodState extends State<Pigfood> {
+class _PigfoodchangeState extends State<Pigfoodchange> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
-        child: Column(
+        child: Stack(
           children: [
-            // FoodButton과 FoodTip을 중앙 정렬
-            Center(
-              child: Row(
-                mainAxisSize: MainAxisSize.min, // 최소 크기로 Row 축소
-                children: [FoodButton(), SizedBox(width: 10), FoodTip()],
+            // 블러처리된 배경
+            BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0), // 블러 강도 조정
+              child: Container(
+                color: Colors.black.withOpacity(0), // 투명한 배경
               ),
             ),
-            Expanded(
-              child: Stack(
-                children: [
-                  Positioned(
-                    top: 32, // This positions FoodMain 32px below FoodButton
-                    left: 0,
-                    right: 0,
-                    child: Center(child: FoodMain()),
+            // 콘텐츠
+            Column(
+              children: [
+                // FoodButton과 FoodTip을 중앙 정렬
+                Center(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min, // 최소 크기로 Row 축소
+                    children: [FoodButton(), SizedBox(width: 10), FoodTip()],
                   ),
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    child: SizedBox(child: Navbar()),
+                ),
+                Expanded(
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        top:
+                            32, // This positions FoodMain 32px below FoodButton
+                        left: 0,
+                        right: 0,
+                        child: Center(child: FoodMain()),
+                      ),
+                      Positioned(
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: SizedBox(child: Navbar()),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
+
+            // 모달 (스크린 중앙에 띄울 작은 위젯)
           ],
         ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // 화면 로드 시 모달 띄우기
+    Future.delayed(Duration.zero, () {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            content: Center(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context); // 모달 닫기
+                },
+                child: Material(
+                  color: Color(0xFFFE8295), // 배경 어두운 색
+                  borderRadius: BorderRadius.circular(8),
+                  child: Container(
+                    width: 300, // 모달 너비 변경
+                    height: 250, // 모달 높이 변경
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 16,
+                      horizontal: 32,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          '급여량 변경',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        SizedBox(height: 12),
+                        Text(
+                          '1',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        SizedBox(height: 16),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context); // 모달 닫기
+                          },
+                          child: Text(
+                            '닫기',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w400,
+                              height: 1,
+                              letterSpacing: -1,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      );
+    });
   }
 }
 

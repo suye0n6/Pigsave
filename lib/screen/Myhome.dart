@@ -15,72 +15,228 @@ class _MyhomeState extends State<Myhome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 24),
-            Padding(
-              padding: const EdgeInsets.only(left: 16), // ✅ 왼쪽에 16px 여백 추가
-              //child: Hometitle(), // 🟢 태그 인식 컨테이너
+      appBar: AppBar(),
+      body: Stack(
+        children: [
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start, // 위에서부터 시작하도록
+              children: [
+                SizedBox(height: 40), // 앱바와 MyhomeTitle() 사이의 간격을 40px로 설정
+                MyhomeTitle(),
+                SizedBox(
+                  height: 40,
+                ), // MyhomeTitle()과 Myhomemain() 사이의 간격을 40px로 설정
+                Myhomemain(),
+                SizedBox(height: 400),
+                Myhomelogout(),
+              ],
             ),
-            SizedBox(height: 32),
-            Expanded(
-              // ✅ 빈 공간을 차지하여 overflow 방지
-              // 홈 바텀 위젯 오버플로우 수정
-              child: Stack(
-                children: [
-                  Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center, // 세로로 중앙 정렬
-                      children: [
-                        Row(
-                          mainAxisAlignment:
-                              MainAxisAlignment.center, // 가로로 중앙 정렬
-                          children: [
-                            Align(
-                              alignment:
-                                  Alignment.center, // FoodButton을 수직 중앙에 배치
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                  top: 0,
-                                  bottom: 2,
-                                ), // FoodButton의 세세한 위치 조정 (위로 2픽셀 만큼 올라감)
-                                //child: FoodButton(),
-                              ),
-                            ),
-                            SizedBox(width: 16), // 버튼과 팁 사이에 간격을 두기 위한 SizedBox
-                            Align(
-                              alignment: Alignment.center, // FoodTip을 수직 중앙에 배치
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                  top: 4,
-                                ), // FoodTip을 세세하게 조정 (위로 4픽셀 만큼 내려감)
-                                child: FoodTip(),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 32,
-                        ), // 버튼과 팁 아래에 32px 간격을 두기 위한 SizedBox
-                        FoodMain(), // 메인 콘텐츠
-                      ],
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 0, // 화면의 하단에 고정
-                    left: 0,
-                    right: 0, // 가로로 꽉 차게
-                    child: SizedBox(
-                      child: Navbar(), // 하단 고정 Navbar
-                    ),
-                  ),
-                ],
+          ),
+          Positioned(
+            bottom: 0, // 화면 하단에 Navbar를 고정
+            left: 0,
+            right: 0,
+            child: SizedBox(
+              child: Navbar(), // 하단 고정 Navbar
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MyhomeTitle extends StatefulWidget {
+  const MyhomeTitle({super.key});
+
+  @override
+  State<MyhomeTitle> createState() => _MyhomeTitleState();
+}
+
+class _MyhomeTitleState extends State<MyhomeTitle> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          width: 328,
+          height: 34,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                '김겸비',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 24,
+                  fontFamily: 'Pretendard',
+                  fontWeight: FontWeight.w700,
+                  height: 1.40,
+                  letterSpacing: -0.24,
+                ),
+              ),
+              const SizedBox(width: 19),
+              Text(
+                '로그아웃',
+                textAlign: TextAlign.right,
+                style: TextStyle(
+                  color: Color(0xFF999999),
+                  fontSize: 14,
+                  fontFamily: 'Pretendard',
+                  fontWeight: FontWeight.w400,
+                  height: 1.40,
+                  letterSpacing: -0.14,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class Myhomemain extends StatefulWidget {
+  const Myhomemain({super.key});
+
+  @override
+  State<Myhomemain> createState() => _MyhomemainState();
+}
+
+class _MyhomemainState extends State<Myhomemain> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          width: 360,
+          height: 72,
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(
+            border: Border(
+              left: BorderSide(
+                width: 5, // Width 설정
+                strokeAlign: BorderSide.strokeAlignOutside, // strokeAlign 설정
+                color: Color(0xFFE6E6E6),
+              ),
+              top: BorderSide(
+                width: 5, // Width 설정
+                strokeAlign: BorderSide.strokeAlignOutside, // strokeAlign 설정
+                color: Color(0xFFE6E6E6),
+              ),
+              right: BorderSide(
+                width: 5, // Width 설정
+                strokeAlign: BorderSide.strokeAlignOutside, // strokeAlign 설정
+                color: Color(0xFFE6E6E6),
+              ),
+              bottom: BorderSide(
+                width: 5, // Width 설정
+                strokeAlign: BorderSide.strokeAlignOutside, // strokeAlign 설정
+                color: Color(0xFFE6E6E6),
               ),
             ),
-          ],
+          ),
+          child: Stack(
+            children: [
+              Positioned(
+                left: 16,
+                top: 17,
+                child: Container(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '현재 앱 버전',
+                        style: TextStyle(
+                          color: Color(0xFF999999),
+                          fontSize: 14,
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w600,
+                          height: 1.20,
+                          letterSpacing: -0.14,
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        '1.0.4',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w600,
+                          height: 1.20,
+                          letterSpacing: -0.14,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(
+                left: 256,
+                top: 26,
+                child: Text(
+                  '최신 버전입니다',
+                  textAlign: TextAlign.right,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.w400,
+                    height: 1.40,
+                    letterSpacing: -0.14,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
+      ],
+    );
+  }
+}
+
+class Myhomelogout extends StatefulWidget {
+  const Myhomelogout({super.key});
+
+  @override
+  State<Myhomelogout> createState() => _MyhomelogoutState();
+}
+
+class _MyhomelogoutState extends State<Myhomelogout> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 328,
+      height: 60,
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 18),
+      decoration: ShapeDecoration(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(width: 1, color: Color(0xFFF90000)),
+          borderRadius: BorderRadius.circular(6),
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            '로그아웃',
+            style: TextStyle(
+              color: Color(0xFFF90000),
+              fontSize: 16,
+              fontFamily: 'Pretendard',
+              fontWeight: FontWeight.w700,
+              height: 1,
+            ),
+          ),
+        ],
       ),
     );
   }

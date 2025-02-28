@@ -34,9 +34,9 @@ class _SettingPageState extends State<SettingPage> {
                     //child: HomeWeidget(), // 메인 콘텐츠 (중앙 정렬)
                   ),
                   Positioned(
-                    bottom: 0, // 화면의 하단에 고정
+                    bottom: 0, // 화면 하단에 Navbar를 고정
                     left: 0,
-                    right: 0, // 가로로 꽉 차게
+                    right: 0,
                     child: SizedBox(
                       child: Navbar(), // 하단 고정 Navbar
                     ),

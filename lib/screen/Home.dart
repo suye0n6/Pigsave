@@ -32,8 +32,12 @@ class _HomeScreenState extends State<HomeScreen> {
               // 홈 바텀 위젯 오버플로우 수정
               child: Stack(
                 children: [
-                  Center(
-                    child: HomeWeidget(), // 메인 콘텐츠 (중앙 정렬)
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: HomeWeidget(),
                   ),
                   Positioned(
                     bottom: 0, // 화면의 하단에 고정
@@ -535,6 +539,13 @@ class HomeWeidget extends StatefulWidget {
   State<HomeWeidget> createState() => _HomeWeidgetState();
 }
 
+class Navbar extends StatefulWidget {
+  const Navbar({super.key});
+
+  @override
+  State<Navbar> createState() => _NavbarState();
+}
+
 class _HomeWeidgetState extends State<HomeWeidget> {
   @override
   Widget build(BuildContext context) {
@@ -542,7 +553,7 @@ class _HomeWeidgetState extends State<HomeWeidget> {
       children: [
         Container(
           width: 328,
-          height: 351,
+          height: 291,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -550,12 +561,10 @@ class _HomeWeidgetState extends State<HomeWeidget> {
             children: [
               Container(
                 width: double.infinity,
-                height: 156,
-                padding: const EdgeInsets.only(
-                  top: 24,
-                  left: 16,
-                  right: 16,
-                  bottom: 20,
+                height: 96,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 24,
                 ),
                 clipBehavior: Clip.antiAlias,
                 decoration: ShapeDecoration(
@@ -641,128 +650,167 @@ class _HomeWeidgetState extends State<HomeWeidget> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 24),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+              Container(
+                width: double.infinity,
+                height: 175,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
                     Container(
+                      width: 157,
+                      height: double.infinity,
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 10,
+                        horizontal: 12,
+                        vertical: 16,
                       ),
+                      clipBehavior: Clip.antiAlias,
                       decoration: ShapeDecoration(
-                        color: Color(0xFFFE8295),
+                        color: Colors.white,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      child: Row(
+                      child: Column(
                         mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            '급이 중인 돼지 보기',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w400,
-                              height: 1.40,
-                              letterSpacing: -0.14,
+                          Container(
+                            width: double.infinity,
+                            height: 48,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: SizedBox(
+                                    width: double.infinity,
+                                    child: Text(
+                                      '태그 인식',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontFamily: 'Pretendard',
+                                        fontWeight: FontWeight.w700,
+                                        height: 1.40,
+                                        letterSpacing: -0.20,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: SizedBox(
+                                    width: double.infinity,
+                                    child: Text(
+                                      '모돈 정보 확인',
+                                      style: TextStyle(
+                                        color: Color(0xFF8C8C8C),
+                                        fontSize: 14,
+                                        fontFamily: 'Pretendard',
+                                        fontWeight: FontWeight.w400,
+                                        height: 1.40,
+                                        letterSpacing: -0.14,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 48),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Pigtag(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              width: 44,
+                              height: 44,
+                              child: SvgPicture.asset('assets/images/scan.svg'),
                             ),
                           ),
                         ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 20),
-              Row(
-                // Row 추가
-                children: [
-                  Container(
-                    width: 157,
-                    height: 175,
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          width: double.infinity,
-                          height: 48,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                width: double.infinity,
-                                child: Text(
-                                  '태그 인식',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w700,
-                                    height: 1.40,
-                                    letterSpacing: -0.20,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: double.infinity,
-                                child: Text(
-                                  '돼지 별 정보 확인',
-                                  style: TextStyle(
-                                    color: Color(0xFF8C8C8C),
-                                    fontSize: 14,
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w400,
-                                    height: 1.40,
-                                    letterSpacing: -0.14,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                    const SizedBox(width: 14),
+                    Container(
+                      width: 157,
+                      height: 175,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 16,
+                      ),
+                      clipBehavior: Clip.antiAlias,
+                      decoration: ShapeDecoration(
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Pigtag()),
-                            );
-                          },
-                          child: Container(
-                            width: 44,
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: double.infinity,
                             height: 48,
-                            child: SvgPicture.asset('assets/images/scan.svg'),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: SizedBox(
+                                    width: double.infinity,
+                                    child: Text(
+                                      '모돈 관리',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontFamily: 'Pretendard',
+                                        fontWeight: FontWeight.w700,
+                                        height: 1.40,
+                                        letterSpacing: -0.20,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: SizedBox(
+                                    width: double.infinity,
+                                    child: Text(
+                                      '돼지 추가, 삭제',
+                                      style: TextStyle(
+                                        color: Color(0xFF8C8C8C),
+                                        fontSize: 14,
+                                        fontFamily: 'Pretendard',
+                                        fontWeight: FontWeight.w400,
+                                        height: 1.40,
+                                        letterSpacing: -0.14,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 14),
-                  Container(
-                    width: 157,
-                    height: 175,
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          width: double.infinity,
-                          height: 48,
-                          child: GestureDetector(
+                          GestureDetector(
                             onTap: () {
                               Navigator.push(
                                 context,
@@ -771,75 +819,44 @@ class _HomeWeidgetState extends State<HomeWeidget> {
                                 ),
                               );
                             },
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  width: double.infinity,
-                                  child: Text(
-                                    '돼지 관리',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 20,
-                                      fontFamily: 'Pretendard',
-                                      fontWeight: FontWeight.w700,
-                                      height: 1.40,
-                                      letterSpacing: -0.20,
+                            child: Container(
+                              width: 60,
+                              height: 47,
+                              child: Stack(
+                                children: [
+                                  // Pignose 이미지를 먼저 배치
+                                  Positioned(
+                                    left: 0,
+                                    top: 0,
+                                    child: Container(
+                                      width: 60,
+                                      height: 47,
+                                      child: SvgPicture.asset(
+                                        'assets/images/Pignose.svg', // Pignose 이미지 경로
+                                      ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(
-                                  width: double.infinity,
-                                  child: Text(
-                                    '돼지 추가, 삭제',
-                                    style: TextStyle(
-                                      color: Color(0xFF8C8C8C),
-                                      fontSize: 14,
-                                      fontFamily: 'Pretendard',
-                                      fontWeight: FontWeight.w400,
-                                      height: 1.40,
-                                      letterSpacing: -0.14,
+                                  // Pignose2 이미지를 그 위에 배치
+                                  Positioned(
+                                    left: 14.89,
+                                    top: 18.29,
+                                    child: Container(
+                                      width: 30.82,
+                                      height: 12.67,
+                                      child: SvgPicture.asset(
+                                        'assets/images/Pignose2.svg', // Pignose2 이미지 경로
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        Container(
-                          width: 100,
-                          height: 47,
-                          child: Stack(
-                            clipBehavior: Clip.none,
-                            children: [
-                              Positioned(
-                                left: 0,
-                                top: 0,
-                                child: SvgPicture.asset(
-                                  'assets/images/Pignose.svg',
-                                  width: 50,
-                                  height: 50,
-                                  allowDrawingOutsideViewBox: true,
-                                ),
-                              ),
-                              Positioned(
-                                left: 14.89,
-                                top: 18.29,
-                                child: SvgPicture.asset(
-                                  'assets/images/Pignose2.svg',
-                                  width: 30.82,
-                                  height: 12.67,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
@@ -847,13 +864,6 @@ class _HomeWeidgetState extends State<HomeWeidget> {
       ],
     );
   }
-}
-
-class Navbar extends StatefulWidget {
-  const Navbar({super.key});
-
-  @override
-  State<Navbar> createState() => _NavbarState();
 }
 
 class _NavbarState extends State<Navbar> {

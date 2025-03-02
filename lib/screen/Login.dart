@@ -88,6 +88,9 @@ class LoginBox extends StatefulWidget {
 }
 
 class _LoginBoxState extends State<LoginBox> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -97,21 +100,31 @@ class _LoginBoxState extends State<LoginBox> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          _buildTextField('이메일', '이메일을 입력해주세요'),
+          // 이메일 입력 필드
+          _buildTextField('이메일', '이메일을 입력해주세요', _emailController),
           const SizedBox(height: 10),
-          _buildTextField('비밀번호', '비밀번호를 입력해주세요'),
+
+          // 비밀번호 입력 필드
+          _buildTextField(
+            '비밀번호',
+            '비밀번호를 입력해주세요',
+            _passwordController,
+            isPassword: true,
+          ),
           const SizedBox(height: 28),
 
           // 로그인 버튼
           GestureDetector(
             onTap: () {
               print('로그인 버튼 클릭');
+              print('이메일: ${_emailController.text}');
+              print('비밀번호: ${_passwordController.text}');
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) {
                     print('HomeScreen으로 이동');
-                    return const HomeScreen(); // HomeScreen으로 이동
+                    return const HomeScreen();
                   },
                 ),
               );
@@ -187,7 +200,13 @@ class _LoginBoxState extends State<LoginBox> {
     );
   }
 
-  Widget _buildTextField(String label, String hintText) {
+  // 텍스트 필드 위젯
+  Widget _buildTextField(
+    String label,
+    String hintText,
+    TextEditingController controller, {
+    bool isPassword = false,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -205,25 +224,40 @@ class _LoginBoxState extends State<LoginBox> {
         const SizedBox(height: 6),
         Container(
           width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 18),
           decoration: BoxDecoration(
             color: const Color(0xFFF2F2F2),
             border: Border.all(width: 1, color: const Color(0xFFB3B3B3)),
             borderRadius: BorderRadius.circular(6),
           ),
-          child: Text(
-            hintText,
-            style: const TextStyle(
-              color: Color(0xFF999999),
-              fontSize: 14,
-              fontFamily: 'Pretendard',
-              fontWeight: FontWeight.w400,
-              height: 1,
-              letterSpacing: -1,
+          child: TextField(
+            controller: controller,
+            obscureText: isPassword, // 비밀번호 입력 시 텍스트 가리기
+            decoration: InputDecoration(
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 14,
+                vertical: 18,
+              ),
+              hintText: hintText,
+              hintStyle: const TextStyle(
+                color: Color(0xFF999999),
+                fontSize: 14,
+                fontFamily: 'Pretendard',
+                fontWeight: FontWeight.w400,
+                height: 1,
+                letterSpacing: -1,
+              ),
+              border: InputBorder.none, // 내부의 기본 보더 제거
             ),
           ),
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 }

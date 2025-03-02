@@ -204,12 +204,17 @@ class _ModalTitleState extends State<ModalTitle> {
                     Positioned(
                       left: 0,
                       top: 0,
-                      child: Container(
-                        width: 32,
-                        height: 32,
-                        child: SvgPicture.asset(
-                          'assets/images/close.svg',
-                        ), //로고 삽입,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context); // 페이지 닫기
+                        },
+                        child: Container(
+                          width: 32,
+                          height: 32,
+                          child: SvgPicture.asset(
+                            'assets/images/close.svg', // 로고 삽입
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -231,6 +236,14 @@ class ModalWidget extends StatefulWidget {
 }
 
 class _ModalWidgetState extends State<ModalWidget> {
+  int _selectedIndex = -1; // 선택된 컨테이너 인덱스
+
+  void _onContainerTap(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -242,289 +255,89 @@ class _ModalWidgetState extends State<ModalWidget> {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: double.infinity,
-                height: 82,
-                padding: const EdgeInsets.only(
-                  top: 16,
-                  left: 20,
-                  right: 142,
-                  bottom: 14,
-                ),
-                clipBehavior: Clip.antiAlias,
-                decoration: ShapeDecoration(
-                  color: Color(0xFFFE8295),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+            children: List.generate(3, (index) {
+              return GestureDetector(
+                onTap: () => _onContainerTap(index),
+                child: Container(
+                  width: double.infinity,
+                  height: 82,
+                  margin: const EdgeInsets.only(bottom: 12),
+                  padding: const EdgeInsets.only(
+                    top: 16,
+                    left: 20,
+                    right: 142,
+                    bottom: 12,
                   ),
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: 52,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: ShapeDecoration(
+                    color:
+                        _selectedIndex == index
+                            ? const Color(0xFFFE8295) // 선택 시 배경색 변경
+                            : Colors.transparent, // 기본 배경색
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        width: 1,
+                        color:
+                            _selectedIndex == index
+                                ? Colors.transparent
+                                : const Color(0xFFFE8295),
+                      ),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '은우 농장 ${index + 1}구역',
+                        style: TextStyle(
+                          color:
+                              _selectedIndex == index
+                                  ? Colors.white
+                                  : Colors.black,
+                          fontSize: 20,
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w700,
+                          height: 1.40,
+                          letterSpacing: -0.20,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Row(
                         children: [
                           SizedBox(
-                            width: double.infinity,
-                            child: SizedBox(
-                              width: double.infinity,
-                              child: Text(
-                                '은우 농장 1구역',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontFamily: 'Pretendard',
-                                  fontWeight: FontWeight.w700,
-                                  height: 1.40,
-                                  letterSpacing: -0.20,
-                                ),
-                              ),
+                            width: 16,
+                            height: 16,
+                            child: SvgPicture.asset(
+                              'assets/images/location_on.svg',
+                              color:
+                                  _selectedIndex == index
+                                      ? Colors.white
+                                      : const Color(0xFFB4B4B4),
                             ),
                           ),
-                          const SizedBox(height: 4),
-                          Container(
-                            width: double.infinity,
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: 16,
-                                  height: 16,
-                                  child: Stack(
-                                    children: [
-                                      Positioned(
-                                        left: 0,
-                                        top: 0,
-                                        child: Container(
-                                          width: 16,
-                                          height: 16,
-                                          child: SvgPicture.asset(
-                                            'assets/images/location_on.svg',
-                                          ), //로고 삽입,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(width: 4),
-                                Text(
-                                  '화성시 매송면 송라리 13-2',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w400,
-                                    height: 1.40,
-                                    letterSpacing: -0.14,
-                                  ),
-                                ),
-                              ],
+                          const SizedBox(width: 4),
+                          Text(
+                            '화성시 매송면 송라리 13-2',
+                            style: TextStyle(
+                              color:
+                                  _selectedIndex == index
+                                      ? Colors.white
+                                      : const Color(0xFFB4B4B4),
+                              fontSize: 14,
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w400,
+                              height: 1.40,
+                              letterSpacing: -0.14,
                             ),
                           ),
                         ],
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 12),
-              Container(
-                width: double.infinity,
-                height: 82,
-                padding: const EdgeInsets.only(
-                  top: 16,
-                  left: 20,
-                  right: 142,
-                  bottom: 12,
-                ),
-                clipBehavior: Clip.antiAlias,
-                decoration: ShapeDecoration(
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(width: 1, color: Color(0xFFB4B4B4)),
-                    borderRadius: BorderRadius.circular(16),
+                    ],
                   ),
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: 52,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: double.infinity,
-                            child: SizedBox(
-                              width: double.infinity,
-                              child: Text(
-                                '은우 농장 2구역',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                  fontFamily: 'Pretendard',
-                                  fontWeight: FontWeight.w700,
-                                  height: 1.40,
-                                  letterSpacing: -0.20,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Container(
-                            width: double.infinity,
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: 16,
-                                  height: 16,
-                                  child: Stack(
-                                    children: [
-                                      Positioned(
-                                        left: 0,
-                                        top: 0,
-                                        child: Container(
-                                          width: 16,
-                                          height: 16,
-                                          child: SvgPicture.asset(
-                                            'assets/images/location_on.svg',
-                                          ), //로고 삽입,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(width: 4),
-                                Text(
-                                  '화성시 매송면 송라리 13-2',
-                                  style: TextStyle(
-                                    color: Color(0xFFB4B4B4),
-                                    fontSize: 14,
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w400,
-                                    height: 1.40,
-                                    letterSpacing: -0.14,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 12),
-              Container(
-                width: double.infinity,
-                height: 82,
-                padding: const EdgeInsets.only(
-                  top: 16,
-                  left: 20,
-                  right: 142,
-                  bottom: 12,
-                ),
-                clipBehavior: Clip.antiAlias,
-                decoration: ShapeDecoration(
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(width: 1, color: Color(0xFFB4B4B4)),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: 52,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: double.infinity,
-                            child: SizedBox(
-                              width: double.infinity,
-                              child: Text(
-                                '은우 농장 3구역',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                  fontFamily: 'Pretendard',
-                                  fontWeight: FontWeight.w700,
-                                  height: 1.40,
-                                  letterSpacing: -0.20,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Container(
-                            width: double.infinity,
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: 16,
-                                  height: 16,
-                                  child: Stack(
-                                    children: [
-                                      Positioned(
-                                        left: 0,
-                                        top: 0,
-                                        child: Container(
-                                          width: 16,
-                                          height: 16,
-                                          child: SvgPicture.asset(
-                                            'assets/images/location_on.svg',
-                                          ), //로고 삽입,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(width: 4),
-                                Text(
-                                  '화성시 매송면 송라리 13-2',
-                                  style: TextStyle(
-                                    color: Color(0xFFB4B4B4),
-                                    fontSize: 14,
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w400,
-                                    height: 1.40,
-                                    letterSpacing: -0.14,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+              );
+            }),
           ),
         ),
       ],

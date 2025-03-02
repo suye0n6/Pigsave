@@ -28,7 +28,7 @@ class _MyhomeState extends State<Myhome> {
                   height: 40,
                 ), // MyhomeTitle()과 Myhomemain() 사이의 간격을 40px로 설정
                 Myhomemain(),
-                SizedBox(height: 400),
+                SizedBox(height: 200),
                 Myhomelogout(),
               ],
             ),

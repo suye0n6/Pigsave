@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pigsave/screen/Home.dart';
 import 'package:pigsave/screen/Myhome.dart';
 import 'package:pigsave/screen/Pigfoodchange.dart';
-import 'package:pigsave/screen/Pigfoods.dart';
 import 'package:pigsave/screen/setting.dart';
 
 class Pigfood extends StatefulWidget {
@@ -21,18 +20,13 @@ class _PigfoodState extends State<Pigfood> {
       body: SafeArea(
         child: Column(
           children: [
-            // FoodButton과 FoodTip을 중앙 정렬
-            Center(
-              child: Row(
-                mainAxisSize: MainAxisSize.min, // 최소 크기로 Row 축소
-                children: [FoodButton(), SizedBox(width: 10), FoodTip()],
-              ),
-            ),
             Expanded(
               child: Stack(
                 children: [
+                  Positioned(top: 0, right: 20, child: FoodTip()),
+
                   Positioned(
-                    top: 32, // This positions FoodMain 32px below FoodButton
+                    top: 70, // This positions FoodMain 32px below FoodButton
                     left: 0,
                     right: 0,
                     child: Center(child: FoodMain()),
@@ -66,208 +60,197 @@ class _FoodMainState extends State<FoodMain> {
     return Column(
       children: [
         Container(
-          width: 328,
-          height: 74,
-          padding: const EdgeInsets.only(
-            bottom: 16,
-          ), // Add padding below to avoid clipping
-          decoration: BoxDecoration(
-            border: Border(
-              bottom: BorderSide(
-                width: 1,
-                color: Color(0xFFE6E6E6),
-              ), // Only bottom border
-            ),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                width: 124,
-                height: 58,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '하루 급여량(한 마리당)',
-                      style: TextStyle(
-                        color: Color(0xFF999999),
-                        fontSize: 14,
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w400,
-                        height: 1.40,
-                        letterSpacing: -0.14,
-                      ),
-                    ),
-                    SizedBox(height: 5),
-                    Text(
-                      '3.2kg',
-                      style: TextStyle(
-                        color: Color(0xFF1A1A1A),
-                        fontSize: 32,
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w600,
-                        height: 1,
-                        letterSpacing: 0.32,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 10),
-              GestureDetector(
-                onTap: () {
-                  // 원하는 페이지로 이동, 예: 'FeedChangePage()'로 이동
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Pigfoodchange(),
-                    ), // 'FeedChangePage()'는 이동할 페이지 클래스입니다
-                  );
-                },
-                child: Container(
-                  width: 90,
-                  height: 36,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 8,
-                  ),
-                  decoration: ShapeDecoration(
-                    color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(width: 1, color: Color(0xFFFE8295)),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        '급여량 변경',
-                        style: TextStyle(
-                          color: Color(0xFFFE8295),
-                          fontSize: 14,
-                          fontFamily: 'Pretendard',
-                          fontWeight: FontWeight.w400,
-                          height: 1.40,
-                          letterSpacing: -0.14,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class FoodButton extends StatefulWidget {
-  const FoodButton({super.key});
-
-  @override
-  State<FoodButton> createState() => _FoodButtonState();
-}
-
-class _FoodButtonState extends State<FoodButton> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: 180,
-          height: 36,
-          padding: const EdgeInsets.all(4),
+          width: 189,
+          height: 220,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
           decoration: ShapeDecoration(
             color: Colors.white,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(16),
             ),
           ),
-          child: Row(
+          child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                width: 84,
-                height: 28,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 4,
-                ),
-                decoration: ShapeDecoration(
-                  color: Color(0xFFFE8295),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                child: Row(
+                width: double.infinity,
+                height: 60,
+                child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      '일괄 급여',
+                      'P372837',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
+                        color: Color(0xFFB3B3B3),
+                        fontSize: 16,
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w400,
                         height: 1.40,
-                        letterSpacing: -0.14,
+                        letterSpacing: 0.16,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Container(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '3.2kg',
+                            style: TextStyle(
+                              color: Color(0xFFFE8295),
+                              fontSize: 24,
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w700,
+                              height: 1.40,
+                              letterSpacing: -0.24,
+                            ),
+                          ),
+                          const SizedBox(width: 6),
+                          Text(
+                            '급여 중',
+                            style: TextStyle(
+                              color: Color(0xFFFE8295),
+                              fontSize: 24,
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w700,
+                              height: 1.40,
+                              letterSpacing: -0.24,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  // Navigate to the SpecialFeedPage
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Pigfoods()),
-                  );
-                },
-                child: Container(
-                  width: 84,
-                  height: 28,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 4,
-                  ),
-                  decoration: ShapeDecoration(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        '특별 급여',
-                        style: TextStyle(
-                          color: Color(0xFF1A1A1A),
-                          fontSize: 14,
-                          fontFamily: 'Pretendard',
-                          fontWeight: FontWeight.w400,
-                          height: 1.40,
-                          letterSpacing: -0.14,
+              const SizedBox(height: 28),
+              Container(
+                height: 92,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 157,
+                      height: 36,
+                      clipBehavior: Clip.antiAlias,
+                      decoration: ShapeDecoration(
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(width: 1, color: Color(0xFFB3B3B3)),
+                          borderRadius: BorderRadius.circular(4),
                         ),
                       ),
-                    ],
-                  ),
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            left: 121,
+                            top: 0,
+                            child: Container(
+                              width: 36,
+                              height: 36,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  left: BorderSide(
+                                    width: 1,
+                                    color: Color(0xFFB3B3B3),
+                                  ),
+                                  top: BorderSide(color: Color(0xFFB3B3B3)),
+                                  right: BorderSide(color: Color(0xFFB3B3B3)),
+                                  bottom: BorderSide(color: Color(0xFFB3B3B3)),
+                                ),
+                              ),
+                              child: SvgPicture.asset('assets/images/up.svg'),
+                            ),
+                          ),
+                          Positioned(
+                            left: 59,
+                            top: 5,
+                            child: Container(
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    '3.2',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color(0xFF1A1A1A),
+                                      fontSize: 16,
+                                      fontFamily: 'Pretendard',
+                                      fontWeight: FontWeight.w400,
+                                      height: 1.60,
+                                      letterSpacing: -0.32,
+                                    ),
+                                  ),
+                                  Text(
+                                    'kg',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color(0xFF1A1A1A),
+                                      fontSize: 16,
+                                      fontFamily: 'Pretendard',
+                                      fontWeight: FontWeight.w400,
+                                      height: 1.60,
+                                      letterSpacing: -0.32,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            left: 0,
+                            top: 0,
+                            child: Container(
+                              width: 39,
+                              height: 36,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  left: BorderSide(color: Color(0xFFB3B3B3)),
+                                  top: BorderSide(color: Color(0xFFB3B3B3)),
+                                  right: BorderSide(
+                                    width: 1,
+                                    color: Color(0xFFB3B3B3),
+                                  ),
+                                  bottom: BorderSide(color: Color(0xFFB3B3B3)),
+                                ),
+                              ),
+                              child: SvgPicture.asset('assets/images/down.svg'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    SizedBox(
+                      width: double.infinity,
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          '+&-나 직접 값을 입력하여\n급여량을 변경하세요(kg단위)',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Color(0xFF999999),
+                            fontSize: 14,
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.w400,
+                            height: 1.60,
+                            letterSpacing: -0.28,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -295,10 +278,14 @@ class _FoodTipState extends State<FoodTip> {
           height: 28,
           child: Stack(
             children: [
-              Container(
-                width: 28,
-                height: 28,
-                child: SvgPicture.asset('assets/images/info.svg'),
+              Positioned(
+                left: 0,
+                top: 0,
+                child: Container(
+                  width: 28,
+                  height: 28,
+                  child: SvgPicture.asset('assets/images/info.svg'),
+                ),
               ),
             ],
           ),

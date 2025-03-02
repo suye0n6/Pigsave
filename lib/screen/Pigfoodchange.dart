@@ -4,7 +4,6 @@ import 'dart:ui'; // dart:ui 임포트
 import 'package:pigsave/screen/Home.dart';
 import 'package:pigsave/screen/Myhome.dart';
 import 'package:pigsave/screen/Pigfood.dart';
-import 'package:pigsave/screen/Pigfoods.dart';
 import 'package:pigsave/screen/setting.dart';
 
 class Pigfoodchange extends StatefulWidget {
@@ -36,7 +35,7 @@ class _PigfoodchangeState extends State<Pigfoodchange> {
                 Center(
                   child: Row(
                     mainAxisSize: MainAxisSize.min, // 최소 크기로 Row 축소
-                    children: [FoodButton(), SizedBox(width: 10), FoodTip()],
+                    children: [SizedBox(width: 10), FoodTip()],
                   ),
                 ),
                 Expanded(
@@ -245,113 +244,6 @@ class _FoodMainState extends State<FoodMain> {
                         '급여량 변경',
                         style: TextStyle(
                           color: Color(0xFFFE8295),
-                          fontSize: 14,
-                          fontFamily: 'Pretendard',
-                          fontWeight: FontWeight.w400,
-                          height: 1.40,
-                          letterSpacing: -0.14,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class FoodButton extends StatefulWidget {
-  const FoodButton({super.key});
-
-  @override
-  State<FoodButton> createState() => _FoodButtonState();
-}
-
-class _FoodButtonState extends State<FoodButton> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: 180,
-          height: 36,
-          padding: const EdgeInsets.all(4),
-          decoration: ShapeDecoration(
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                width: 84,
-                height: 28,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 4,
-                ),
-                decoration: ShapeDecoration(
-                  color: Color(0xFFFE8295),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      '일괄 급여',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w400,
-                        height: 1.40,
-                        letterSpacing: -0.14,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  // Navigate to the SpecialFeedPage
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Pigfoods()),
-                  );
-                },
-                child: Container(
-                  width: 84,
-                  height: 28,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 4,
-                  ),
-                  decoration: ShapeDecoration(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        '특별 급여',
-                        style: TextStyle(
-                          color: Color(0xFF1A1A1A),
                           fontSize: 14,
                           fontFamily: 'Pretendard',
                           fontWeight: FontWeight.w400,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screen/Login.dart'; // Login 화면 import 및 클릭 이벤트 구현
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() {
   runApp(const MyApp());

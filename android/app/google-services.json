@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "728399425211",
+    "project_id": "pigsave-c4738",
+    "storage_bucket": "pigsave-c4738.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:728399425211:android:893ec82a8e18a01d87439e",
+        "android_client_info": {
+          "package_name": "com.example.pigsave"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2a2-h3z2ORcLcuinDP2s1TYnlL_j9q6I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

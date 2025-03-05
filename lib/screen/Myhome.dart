@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pigsave/screen/Home.dart';
+import 'package:pigsave/screen/Login.dart';
 import 'package:pigsave/screen/Pigfood.dart';
 import 'package:pigsave/screen/setting.dart';
 
@@ -211,32 +212,40 @@ class Myhomelogout extends StatefulWidget {
 class _MyhomelogoutState extends State<Myhomelogout> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 328,
-      height: 60,
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 18),
-      decoration: ShapeDecoration(
-        shape: RoundedRectangleBorder(
-          side: BorderSide(width: 1, color: Color(0xFFF90000)),
-          borderRadius: BorderRadius.circular(6),
-        ),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            '로그아웃',
-            style: TextStyle(
-              color: Color(0xFFF90000),
-              fontSize: 16,
-              fontFamily: 'Pretendard',
-              fontWeight: FontWeight.w700,
-              height: 1,
-            ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LoginScreen()),
+        );
+      },
+      child: Container(
+        width: 328,
+        height: 60,
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 18),
+        decoration: ShapeDecoration(
+          shape: RoundedRectangleBorder(
+            side: BorderSide(width: 1, color: Color(0xFFF90000)),
+            borderRadius: BorderRadius.circular(6),
           ),
-        ],
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              '로그아웃',
+              style: TextStyle(
+                color: Color(0xFFF90000),
+                fontSize: 16,
+                fontFamily: 'Pretendard',
+                fontWeight: FontWeight.w700,
+                height: 1,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

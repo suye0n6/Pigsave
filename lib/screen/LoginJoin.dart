@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class LoginJoin extends StatefulWidget {
   const LoginJoin({super.key});
@@ -133,19 +135,21 @@ class _MailCheckState extends State<MailCheck> {
                                 ),
                               ),
                               child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    '이메일을 입력해주세요',
-                                    style: TextStyle(
-                                      color: Color(0xFF999999),
-                                      fontSize: 14,
-                                      fontFamily: 'Pretendard',
-                                      fontWeight: FontWeight.w400,
-                                      height: 1,
-                                      letterSpacing: -1,
+                                  Expanded(
+                                    child: TextField(
+                                      decoration: InputDecoration(
+                                        hintText: '이메일을 입력해주세요',
+                                        hintStyle: TextStyle(
+                                          color: Color(0xFF999999),
+                                          fontSize: 14,
+                                          fontFamily: 'Pretendard',
+                                          fontWeight: FontWeight.w400,
+                                          height: 1,
+                                          letterSpacing: -1,
+                                        ),
+                                        border: InputBorder.none, // 테두리 없앰
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -195,34 +199,27 @@ class _MailCheckState extends State<MailCheck> {
               Container(
                 height: 72,
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisSize: MainAxisSize.max, // max로 설정하여 공간을 다 차지하도록
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
                       width: double.infinity,
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: Text(
-                          '인증번호 확인',
-                          style: TextStyle(
-                            color: Color(0xFF666666),
-                            fontSize: 14,
-                            fontFamily: 'Pretendard',
-                            fontWeight: FontWeight.w400,
-                            height: 1,
-                            letterSpacing: -1,
-                          ),
+                      child: Text(
+                        '인증번호 확인',
+                        style: TextStyle(
+                          color: Color(0xFF666666),
+                          fontSize: 14,
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w400,
+                          height: 1,
+                          letterSpacing: -1,
                         ),
                       ),
                     ),
                     SizedBox(height: 6),
                     Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 14,
-                        vertical: 18,
-                      ),
                       decoration: ShapeDecoration(
                         color: Color(0xFFF2F2F2),
                         shape: RoundedRectangleBorder(
@@ -230,23 +227,41 @@ class _MailCheckState extends State<MailCheck> {
                           borderRadius: BorderRadiusDirectional.circular(6),
                         ),
                       ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            '인증번호를 입력해주세요',
-                            style: TextStyle(
-                              color: Color(0xFF999999),
-                              fontSize: 14,
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w400,
-                              height: 1,
-                              letterSpacing: -1,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                      hintText: '인증번호를 입력해주세요',
+                                      hintStyle: TextStyle(
+                                        color: Color(0xFF999999),
+                                        fontSize: 14,
+                                        fontFamily: 'Pretendard',
+                                        fontWeight: FontWeight.w400,
+                                        height: 1,
+                                        letterSpacing: -1,
+                                      ),
+                                      contentPadding: EdgeInsets.symmetric(
+                                        vertical: 10,
+                                        horizontal: 12,
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius: BorderRadius.circular(6),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -307,10 +322,7 @@ class _PasswordCheckState extends State<PasswordCheck> {
                     SizedBox(height: 6),
                     Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 14,
-                        vertical: 18,
-                      ),
+
                       decoration: ShapeDecoration(
                         color: Color(0xFFF2F2F2),
                         shape: RoundedRectangleBorder(
@@ -323,15 +335,27 @@ class _PasswordCheckState extends State<PasswordCheck> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(
-                            '비밀번호를 입력해주세요',
-                            style: TextStyle(
-                              color: Color(0xFF999999),
-                              fontSize: 14,
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w400,
-                              height: 1,
-                              letterSpacing: -1,
+                          Expanded(
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: '비밀번호를 입력해주세요',
+                                hintStyle: TextStyle(
+                                  color: Color(0xFF999999),
+                                  fontSize: 14,
+                                  fontFamily: 'Pretendard',
+                                  fontWeight: FontWeight.w400,
+                                  height: 1,
+                                  letterSpacing: -1,
+                                ),
+                                contentPadding: EdgeInsets.symmetric(
+                                  vertical: 10,
+                                  horizontal: 12,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                              ),
                             ),
                           ),
                         ],
@@ -368,10 +392,6 @@ class _PasswordCheckState extends State<PasswordCheck> {
                     SizedBox(height: 6),
                     Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 14,
-                        vertical: 18,
-                      ),
                       decoration: ShapeDecoration(
                         color: Color(0xFFF2F2F2),
                         shape: RoundedRectangleBorder(
@@ -384,14 +404,27 @@ class _PasswordCheckState extends State<PasswordCheck> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(
-                            '비밀번호를 다시 입력해주세요',
-                            style: TextStyle(
-                              color: Color(0xFF999999),
-                              fontSize: 14,
-                              fontFamily: 'Pretendard',
-                              height: 1,
-                              letterSpacing: -1,
+                          Expanded(
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: '비밀번호를 다시 입력해주세요',
+                                hintStyle: TextStyle(
+                                  color: Color(0xFF999999),
+                                  fontSize: 14,
+                                  fontFamily: 'Pretendard',
+                                  fontWeight: FontWeight.w400,
+                                  height: 1,
+                                  letterSpacing: -1,
+                                ),
+                                contentPadding: EdgeInsets.symmetric(
+                                  vertical: 10,
+                                  horizontal: 12,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                              ),
                             ),
                           ),
                         ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'screen/Login.dart'; // Login 화면 import 및 클릭 이벤트 구현
 import 'firebase_options.dart'; // Firebase 옵션 파일 임포트
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() async {
   // Firebase 초기화 코드
@@ -9,7 +10,7 @@ void main() async {
   await Firebase.initializeApp(
     options:
         DefaultFirebaseOptions
-            .currentPlatform, // firebase_options.dart 파일에서 옵션을 가져옴
+            .currentPlatform, // firebase_options.dart에서 옵션 가져오기
   );
 
   runApp(const MyApp());

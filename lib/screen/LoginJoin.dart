@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class LoginJoin extends StatefulWidget {
   const LoginJoin({super.key});
@@ -73,6 +76,16 @@ class MailCheck extends StatefulWidget {
 }
 
 class _MailCheckState extends State<MailCheck> {
+  final TextEditingController _emailController =
+      TextEditingController(); // _emailController 선언
+  final FirebaseAuth _auth = FirebaseAuth.instance; // FirebaseAuth 객체 선언
+
+  @override
+  void dispose() {
+    _emailController.dispose(); // 메모리 관리
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -94,18 +107,15 @@ class _MailCheckState extends State<MailCheck> {
                   children: [
                     SizedBox(
                       width: double.infinity,
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: Text(
-                          '이메일',
-                          style: TextStyle(
-                            color: Color(0xFF666666),
-                            fontSize: 14,
-                            fontFamily: 'Pretendard',
-                            fontWeight: FontWeight.w400,
-                            height: 1,
-                            letterSpacing: -1,
-                          ),
+                      child: Text(
+                        '이메일',
+                        style: TextStyle(
+                          color: Color(0xFF666666),
+                          fontSize: 14,
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w400,
+                          height: 1,
+                          letterSpacing: -1,
                         ),
                       ),
                     ),
@@ -134,134 +144,78 @@ class _MailCheckState extends State<MailCheck> {
                                   borderRadius: BorderRadius.circular(6),
                                 ),
                               ),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: TextField(
-                                      decoration: InputDecoration(
-                                        hintText: '이메일을 입력해주세요',
-                                        hintStyle: TextStyle(
-                                          color: Color(0xFF999999),
-                                          fontSize: 14,
-                                          fontFamily: 'Pretendard',
-                                          fontWeight: FontWeight.w400,
-                                          height: 1,
-                                          letterSpacing: -1,
-                                        ),
-                                        border: InputBorder.none, // 테두리 없앰
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 6),
-                          Container(
-                            height: 50,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 14,
-                              vertical: 18,
-                            ),
-                            decoration: ShapeDecoration(
-                              color: Color(0xFFFE8295),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '인증번호 전송',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.white,
+                              child: TextField(
+                                controller:
+                                    _emailController, // _emailController 연결
+                                decoration: InputDecoration(
+                                  hintText: '이메일을 입력해주세요',
+                                  hintStyle: TextStyle(
+                                    color: Color(0xFF999999),
                                     fontSize: 14,
                                     fontFamily: 'Pretendard',
                                     fontWeight: FontWeight.w400,
                                     height: 1,
                                     letterSpacing: -1,
                                   ),
+                                  border: InputBorder.none,
                                 ),
-                              ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 6),
+                          GestureDetector(
+                            onTap: () async {
+                              try {
+                                // 이메일 인증 코드
+                                UserCredential userCredential = await _auth
+                                    .createUserWithEmailAndPassword(
+                                      email: _emailController.text,
+                                      password: "임시비밀번호123!", // 비밀번호 설정
+                                    );
+
+                                User? user = userCredential.user;
+                                if (user != null && !user.emailVerified) {
+                                  await user.sendEmailVerification();
+                                  print("인증 이메일을 전송했습니다.");
+                                }
+                              } catch (e) {
+                                print("오류 발생: $e");
+                              }
+                            },
+                            child: Container(
+                              height: 50,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 14,
+                                vertical: 18,
+                              ),
+                              decoration: ShapeDecoration(
+                                color: const Color(0xFFFE8295),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                              ),
+                              child: const Row(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    '인증번호 전송',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                      fontFamily: 'Pretendard',
+                                      fontWeight: FontWeight.w400,
+                                      height: 1,
+                                      letterSpacing: -1,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
-              Container(
-                height: 72,
-                child: Column(
-                  mainAxisSize: MainAxisSize.max, // max로 설정하여 공간을 다 차지하도록
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: double.infinity,
-                      child: Text(
-                        '인증번호 확인',
-                        style: TextStyle(
-                          color: Color(0xFF666666),
-                          fontSize: 14,
-                          fontFamily: 'Pretendard',
-                          fontWeight: FontWeight.w400,
-                          height: 1,
-                          letterSpacing: -1,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 6),
-                    Container(
-                      width: double.infinity,
-                      decoration: ShapeDecoration(
-                        color: Color(0xFFF2F2F2),
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(width: 1, color: Color(0xFFB3B3B3)),
-                          borderRadius: BorderRadiusDirectional.circular(6),
-                        ),
-                      ),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: TextField(
-                                    decoration: InputDecoration(
-                                      hintText: '인증번호를 입력해주세요',
-                                      hintStyle: TextStyle(
-                                        color: Color(0xFF999999),
-                                        fontSize: 14,
-                                        fontFamily: 'Pretendard',
-                                        fontWeight: FontWeight.w400,
-                                        height: 1,
-                                        letterSpacing: -1,
-                                      ),
-                                      contentPadding: EdgeInsets.symmetric(
-                                        vertical: 10,
-                                        horizontal: 12,
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderSide: BorderSide.none,
-                                        borderRadius: BorderRadius.circular(6),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
                       ),
                     ),
                   ],

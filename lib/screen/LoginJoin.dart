@@ -126,7 +126,8 @@ class _MailCheckState extends State<MailCheck> {
                         height: 51,
                         padding: const EdgeInsets.symmetric(
                           horizontal: 14,
-                          vertical: 18,
+                          vertical:
+                              0, // vertical padding을 0으로 설정 (TextField와 중복 방지)
                         ),
                         decoration: ShapeDecoration(
                           color: Color(0xFFF2F2F2),
@@ -138,33 +139,33 @@ class _MailCheckState extends State<MailCheck> {
                             borderRadius: BorderRadius.circular(6),
                           ),
                         ),
-                        child: TextField(
-                          controller: _emailController,
-                          maxLines: 1, // 한 줄로 제한
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            hintText: '이메일을 입력해주세요',
-                            hintStyle: TextStyle(
-                              color: Color(0xFF999999),
+                        child: Align(
+                          alignment: Alignment.centerLeft, // 힌트 정렬 문제 해결
+                          child: TextField(
+                            controller: _emailController,
+                            maxLines: 1,
+                            keyboardType: TextInputType.emailAddress,
+                            decoration: InputDecoration(
+                              hintText: '이메일을 입력해주세요',
+                              hintStyle: TextStyle(
+                                color: Color(0xFF999999),
+                                fontSize: 14,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w400,
+                                letterSpacing: -1,
+                              ),
+                              border: InputBorder.none,
+                              contentPadding: EdgeInsets.zero, // 중복 패딩 제거
+                            ),
+                            style: TextStyle(
                               fontSize: 14,
                               fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w400,
-                              height: 1,
-                              letterSpacing: -1,
                             ),
-                            border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(vertical: 10),
+                            textAlign: TextAlign.start,
+                            scrollPhysics: ClampingScrollPhysics(),
+                            textInputAction: TextInputAction.done,
+                            keyboardAppearance: Brightness.light,
                           ),
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontFamily: 'Pretendard',
-                          ),
-                          textAlign: TextAlign.start, // 텍스트 정렬
-                          scrollPhysics:
-                              ClampingScrollPhysics(), // 가로로 스크롤을 가능하게 설정
-                          textInputAction: TextInputAction.done,
-                          // 텍스트 필드 내에서 가로 스크롤을 활성화
-                          keyboardAppearance: Brightness.light, // 키보드 디자인 설정
                         ),
                       ),
                     ),

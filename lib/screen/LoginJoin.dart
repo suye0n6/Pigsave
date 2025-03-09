@@ -24,9 +24,11 @@ class _LoginJoinState extends State<LoginJoin> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
                 Maintitle(),
-                SizedBox(height: 40),
+                SizedBox(height: 50),
                 MailCheck(),
-                SizedBox(height: 44),
+                SizedBox(height: 6),
+                Rightcheck(),
+                SizedBox(height: 24),
                 PasswordCheck(),
                 SizedBox(height: 56),
                 JoinButton(),
@@ -92,136 +94,166 @@ class _MailCheckState extends State<MailCheck> {
       children: [
         Container(
           width: 328,
-          height: 160,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(
+                width: double.infinity,
+                child: Text(
+                  '이메일',
+                  style: TextStyle(
+                    color: Color(0xFF666666),
+                    fontSize: 14,
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.w400,
+                    height: 1,
+                    letterSpacing: -1,
+                  ),
+                ),
+              ),
+              SizedBox(height: 6),
               Container(
-                height: 72,
-                child: Column(
+                width: double.infinity,
+                child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(
-                      width: double.infinity,
-                      child: Text(
-                        '이메일',
-                        style: TextStyle(
-                          color: Color(0xFF666666),
-                          fontSize: 14,
-                          fontFamily: 'Pretendard',
-                          fontWeight: FontWeight.w400,
-                          height: 1,
-                          letterSpacing: -1,
+                    Expanded(
+                      child: Container(
+                        height: 51,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 18,
+                        ),
+                        decoration: ShapeDecoration(
+                          color: Color(0xFFF2F2F2),
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              width: 1,
+                              color: Color(0xFFB3B3B3),
+                            ),
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                        ),
+                        child: TextField(
+                          controller: _emailController,
+                          maxLines: 1, // 한 줄로 제한
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            hintText: '이메일을 입력해주세요',
+                            hintStyle: TextStyle(
+                              color: Color(0xFF999999),
+                              fontSize: 14,
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w400,
+                              height: 1,
+                              letterSpacing: -1,
+                            ),
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.symmetric(vertical: 10),
+                          ),
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: 'Pretendard',
+                          ),
+                          textAlign: TextAlign.start, // 텍스트 정렬
+                          scrollPhysics:
+                              ClampingScrollPhysics(), // 가로로 스크롤을 가능하게 설정
+                          textInputAction: TextInputAction.done,
+                          // 텍스트 필드 내에서 가로 스크롤을 활성화
+                          keyboardAppearance: Brightness.light, // 키보드 디자인 설정
                         ),
                       ),
                     ),
-                    SizedBox(height: 6),
-                    Container(
-                      width: double.infinity,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Container(
-                              height: 51,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 14,
-                                vertical: 18,
-                              ),
-                              decoration: ShapeDecoration(
-                                color: Color(0xFFF2F2F2),
-                                shape: RoundedRectangleBorder(
-                                  side: BorderSide(
-                                    width: 1,
-                                    color: Color(0xFFB3B3B3),
-                                  ),
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                              ),
-                              child: TextField(
-                                controller:
-                                    _emailController, // _emailController 연결
-                                decoration: InputDecoration(
-                                  hintText: '이메일을 입력해주세요',
-                                  hintStyle: TextStyle(
-                                    color: Color(0xFF999999),
-                                    fontSize: 14,
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w400,
-                                    height: 1,
-                                    letterSpacing: -1,
-                                  ),
-                                  border: InputBorder.none,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 6),
-                          GestureDetector(
-                            onTap: () async {
-                              try {
-                                // 이메일 인증 코드
-                                UserCredential userCredential = await _auth
-                                    .createUserWithEmailAndPassword(
-                                      email: _emailController.text,
-                                      password: "임시비밀번호123!", // 비밀번호 설정
-                                    );
+                    const SizedBox(width: 6),
+                    GestureDetector(
+                      onTap: () async {
+                        try {
+                          // 이메일 인증 코드
+                          UserCredential userCredential = await _auth
+                              .createUserWithEmailAndPassword(
+                                email: _emailController.text,
+                                password: "임시비밀번호123!", // 비밀번호 설정
+                              );
 
-                                User? user = userCredential.user;
-                                if (user != null && !user.emailVerified) {
-                                  await user.sendEmailVerification();
-                                  print("인증 이메일을 전송했습니다.");
-                                }
-                              } catch (e) {
-                                print("오류 발생: $e");
-                              }
-                            },
-                            child: Container(
-                              height: 50,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 14,
-                                vertical: 18,
-                              ),
-                              decoration: ShapeDecoration(
-                                color: const Color(0xFFFE8295),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                              ),
-                              child: const Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    '인증번호 전송',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 14,
-                                      fontFamily: 'Pretendard',
-                                      fontWeight: FontWeight.w400,
-                                      height: 1,
-                                      letterSpacing: -1,
-                                    ),
-                                  ),
-                                ],
+                          User? user = userCredential.user;
+                          if (user != null && !user.emailVerified) {
+                            await user.sendEmailVerification();
+                            print("인증 이메일을 전송했습니다.");
+                          }
+                        } catch (e) {
+                          print("오류 발생: $e");
+                        }
+                      },
+                      child: Container(
+                        height: 50,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 18,
+                        ),
+                        decoration: ShapeDecoration(
+                          color: const Color(0xFFFE8295),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                        ),
+                        child: const Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              '인증메일 전송',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w400,
+                                height: 1,
+                                letterSpacing: -1,
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
             ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class Rightcheck extends StatefulWidget {
+  const Rightcheck({super.key});
+
+  @override
+  State<Rightcheck> createState() => _RightcheckState();
+}
+
+class _RightcheckState extends State<Rightcheck> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(height: 30),
+        Text(
+          '인증이 완료되었습니다',
+          style: TextStyle(
+            color: Color(0xFFFE8295),
+            fontSize: 14,
+            fontFamily: 'Pretendard',
+            fontWeight: FontWeight.w400,
+            height: 1,
+            letterSpacing: -1,
           ),
         ),
       ],

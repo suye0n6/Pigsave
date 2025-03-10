@@ -16,6 +16,16 @@ class _LoginJoinState extends State<LoginJoin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF2F2F2),
+      appBar: AppBar(
+        toolbarHeight: 29,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back), // 뒤로가기 아이콘
+          onPressed: () {
+            Navigator.pop(context); // 이전 페이지로 이동
+          },
+        ),
+      ),
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
@@ -247,9 +257,9 @@ class _RightcheckState extends State<Rightcheck> {
       children: [
         SizedBox(height: 30),
         Text(
-          '인증이 완료되었습니다',
+          '인증을 진행해주세요',
           style: TextStyle(
-            color: Color(0xFFFE8295),
+            color: Color(0xFF666666),
             fontSize: 14,
             fontFamily: 'Pretendard',
             fontWeight: FontWeight.w400,

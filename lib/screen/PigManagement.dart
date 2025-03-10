@@ -17,6 +17,7 @@ class _PigMangeState extends State<PigMange> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF2F2F2),
       appBar: AppBar(),
       body: Stack(
         children: [
@@ -327,7 +328,7 @@ class _MantempState extends State<Mantemp> {
                       SizedBox(
                         width: double.infinity,
                         child: Text(
-                          '38.5 ~ 39.5℃가적정한 체온입니다.',
+                          '38.5 ~ 39.5℃가 적정한 체온입니다.',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Color(0xFF7F7F7F),

@@ -17,6 +17,7 @@ class _PigfoodchangeState extends State<Pigfoodchange> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF2F2F2),
       appBar: AppBar(),
       body: SafeArea(
         child: Stack(

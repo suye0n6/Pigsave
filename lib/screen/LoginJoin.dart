@@ -18,6 +18,7 @@ class _LoginJoinState extends State<LoginJoin> {
     return Scaffold(
       backgroundColor: const Color(0xFFF2F2F2),
       appBar: AppBar(
+        backgroundColor: const Color(0xFFF2F2F2),
         toolbarHeight: 29,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back), // 뒤로가기 아이콘

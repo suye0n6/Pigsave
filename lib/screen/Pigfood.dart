@@ -17,7 +17,7 @@ class _PigfoodState extends State<Pigfood> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF2F2F2),
-      appBar: AppBar(),
+      appBar: AppBar(backgroundColor: const Color(0xFFF2F2F2)),
       body: SafeArea(
         child: Column(
           children: [

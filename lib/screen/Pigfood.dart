@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:pigsave/screen/Home.dart';
 import 'package:pigsave/screen/Myhome.dart';
 import 'package:pigsave/screen/Pigfoodchange.dart';
@@ -25,9 +26,8 @@ class _PigfoodState extends State<Pigfood> {
               child: Stack(
                 children: [
                   Positioned(top: 0, right: 20, child: FoodTip()),
-
                   Positioned(
-                    top: 70, // This positions FoodMain 32px below FoodButton
+                    top: 70,
                     left: 0,
                     right: 0,
                     child: Center(child: FoodMain()),
@@ -56,6 +56,42 @@ class FoodMain extends StatefulWidget {
 }
 
 class _FoodMainState extends State<FoodMain> {
+  final DatabaseReference _foodRef = FirebaseDatabase.instance.ref('food');
+
+  String cardUid = '';
+  double foodAmount = 0.0;
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _foodRef.onValue.listen((event) {
+      final data = event.snapshot.value as Map?;
+      if (data != null) {
+        setState(() {
+          cardUid = data['card_uid'] ?? '';
+          foodAmount = (data['food'] as num?)?.toDouble() ?? 0.0;
+          _controller.text = foodAmount.toStringAsFixed(1);
+        });
+      }
+    });
+  }
+
+  void updateFoodAmount(double newAmount) async {
+    await _foodRef.update({'food': newAmount, 'change_flag': 1});
+    setState(() {
+      foodAmount = newAmount;
+      _controller.text = newAmount.toStringAsFixed(1);
+    });
+  }
+
+  void _onSubmitted(String value) {
+    final parsed = double.tryParse(value);
+    if (parsed != null) {
+      updateFoodAmount(parsed);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -71,20 +107,14 @@ class _FoodMainState extends State<FoodMain> {
             ),
           ),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                width: double.infinity,
                 height: 60,
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'P372837',
+                      cardUid,
                       style: TextStyle(
                         color: Color(0xFFB3B3B3),
                         fontSize: 16,
@@ -95,37 +125,33 @@ class _FoodMainState extends State<FoodMain> {
                       ),
                     ),
                     const SizedBox(height: 4),
-                    Container(
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '3.2kg',
-                            style: TextStyle(
-                              color: Color(0xFFFE8295),
-                              fontSize: 24,
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w700,
-                              height: 1.40,
-                              letterSpacing: -0.24,
-                            ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          '${foodAmount.toStringAsFixed(1)}kg',
+                          style: TextStyle(
+                            color: Color(0xFFFE8295),
+                            fontSize: 24,
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.w700,
+                            height: 1.40,
+                            letterSpacing: -0.24,
                           ),
-                          const SizedBox(width: 6),
-                          Text(
-                            '급여 중',
-                            style: TextStyle(
-                              color: Color(0xFFFE8295),
-                              fontSize: 24,
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w700,
-                              height: 1.40,
-                              letterSpacing: -0.24,
-                            ),
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          '급여 중',
+                          style: TextStyle(
+                            color: Color(0xFFFE8295),
+                            fontSize: 24,
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.w700,
+                            height: 1.40,
+                            letterSpacing: -0.24,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -134,121 +160,110 @@ class _FoodMainState extends State<FoodMain> {
               Container(
                 height: 92,
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                       width: 157,
                       height: 36,
-                      clipBehavior: Clip.antiAlias,
                       decoration: ShapeDecoration(
                         shape: RoundedRectangleBorder(
                           side: BorderSide(width: 1, color: Color(0xFFB3B3B3)),
                           borderRadius: BorderRadius.circular(4),
                         ),
                       ),
-                      child: Stack(
+                      child: Row(
                         children: [
-                          Positioned(
-                            left: 121,
-                            top: 0,
-                            child: Container(
-                              width: 36,
-                              height: 36,
-                              clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  left: BorderSide(
-                                    width: 1,
-                                    color: Color(0xFFB3B3B3),
-                                  ),
-                                  top: BorderSide(color: Color(0xFFB3B3B3)),
-                                  right: BorderSide(color: Color(0xFFB3B3B3)),
-                                  bottom: BorderSide(color: Color(0xFFB3B3B3)),
-                                ),
-                              ),
-                              child: SvgPicture.asset('assets/images/up.svg'),
-                            ),
-                          ),
-                          Positioned(
-                            left: 59,
-                            top: 5,
-                            child: Container(
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    '3.2',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Color(0xFF1A1A1A),
-                                      fontSize: 16,
-                                      fontFamily: 'Pretendard',
-                                      fontWeight: FontWeight.w400,
-                                      height: 1.60,
-                                      letterSpacing: -0.32,
-                                    ),
-                                  ),
-                                  Text(
-                                    'kg',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Color(0xFF1A1A1A),
-                                      fontSize: 16,
-                                      fontFamily: 'Pretendard',
-                                      fontWeight: FontWeight.w400,
-                                      height: 1.60,
-                                      letterSpacing: -0.32,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            left: 0,
-                            top: 0,
+                          // - 버튼
+                          GestureDetector(
+                            onTap: () {
+                              final newAmount = (foodAmount - 0.1).clamp(
+                                0.0,
+                                100.0,
+                              );
+                              updateFoodAmount(
+                                double.parse(newAmount.toStringAsFixed(1)),
+                              );
+                            },
                             child: Container(
                               width: 39,
                               height: 36,
-                              clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  left: BorderSide(color: Color(0xFFB3B3B3)),
-                                  top: BorderSide(color: Color(0xFFB3B3B3)),
-                                  right: BorderSide(
-                                    width: 1,
-                                    color: Color(0xFFB3B3B3),
-                                  ),
-                                  bottom: BorderSide(color: Color(0xFFB3B3B3)),
+                              child: SvgPicture.asset('assets/images/down.svg'),
+                            ),
+                          ),
+                          // 숫자 입력 필드
+                          Expanded(
+                            child: TextField(
+                              controller: _controller,
+                              textAlign: TextAlign.center,
+                              keyboardType: TextInputType.numberWithOptions(
+                                decimal: true,
+                              ),
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                contentPadding: EdgeInsets.only(
+                                  bottom: 17,
+                                  left: 14,
                                 ),
                               ),
-                              child: SvgPicture.asset('assets/images/down.svg'),
+                              style: TextStyle(
+                                color: Color(0xFF1A1A1A),
+                                fontSize: 16,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w400,
+                                height: 1.60,
+                                letterSpacing: -0.32,
+                              ),
+                              onSubmitted: _onSubmitted,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 2,
+                              bottom: 0,
+                              right: 13,
+                            ), // ← 여기 왼쪽 padding 조정
+                            child: Text(
+                              'kg',
+                              style: TextStyle(
+                                color: Color(0xFF1A1A1A),
+                                fontSize: 16,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w400,
+                                height: 1.60,
+                                letterSpacing: -0.32,
+                              ),
+                            ),
+                          ),
+                          // + 버튼
+                          GestureDetector(
+                            onTap: () {
+                              final newAmount = (foodAmount + 0.1).clamp(
+                                0.0,
+                                100.0,
+                              );
+                              updateFoodAmount(
+                                double.parse(newAmount.toStringAsFixed(1)),
+                              );
+                            },
+                            child: Container(
+                              width: 36,
+                              height: 36,
+                              child: SvgPicture.asset('assets/images/up.svg'),
                             ),
                           ),
                         ],
                       ),
                     ),
                     const SizedBox(height: 12),
-                    SizedBox(
-                      width: double.infinity,
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: Text(
-                          '+&-나 직접 값을 입력하여\n급여량을 변경하세요(kg단위)',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Color(0xFF999999),
-                            fontSize: 14,
-                            fontFamily: 'Pretendard',
-                            fontWeight: FontWeight.w400,
-                            height: 1.60,
-                            letterSpacing: -0.28,
-                          ),
-                        ),
+                    Text(
+                      '+&-나 직접 값을 입력하여\n급여량을 변경하세요(kg단위)',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xFF999999),
+                        fontSize: 14,
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w400,
+                        height: 1.60,
+                        letterSpacing: -0.28,
                       ),
                     ),
                   ],

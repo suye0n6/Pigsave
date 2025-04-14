@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import '../utils/validators.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -252,13 +252,31 @@ class Rightcheck extends StatefulWidget {
 }
 
 class _RightcheckState extends State<Rightcheck> {
+  bool isVerified = false;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkVerification();
+  }
+
+  // 인증 상태 확인
+  void _checkVerification() async {
+    User? user = _auth.currentUser;
+    await user?.reload(); // 최신 정보 불러오기
+    setState(() {
+      isVerified = user?.emailVerified ?? false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         SizedBox(height: 30),
         Text(
-          '인증을 진행해주세요',
+          isVerified ? '인증되었습니다' : '인증을 진행해주세요',
           style: TextStyle(
             color: Color(0xFF666666),
             fontSize: 14,
@@ -268,6 +286,8 @@ class _RightcheckState extends State<Rightcheck> {
             letterSpacing: -1,
           ),
         ),
+        if (!isVerified)
+          TextButton(onPressed: _checkVerification, child: Text("인증 확인")),
       ],
     );
   }

@@ -137,8 +137,7 @@ class _MailCheckState extends State<MailCheck> {
                         height: 51,
                         padding: const EdgeInsets.symmetric(
                           horizontal: 14,
-                          vertical:
-                              0, // vertical padding을 0으로 설정 (TextField와 중복 방지)
+                          vertical: 0, // vertical padding을 0으로 설정
                         ),
                         decoration: ShapeDecoration(
                           color: Color(0xFFF2F2F2),

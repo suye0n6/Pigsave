@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       home: const Control(), // 첫 화면을 Control 페이지로 설정
+      debugShowCheckedModeBanner: false,
     );
   }
 }

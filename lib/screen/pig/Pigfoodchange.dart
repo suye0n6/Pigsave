@@ -22,29 +22,18 @@ class _PigfoodchangeState extends State<Pigfoodchange> {
       body: SafeArea(
         child: Stack(
           children: [
-            // 블러처리된 배경
             BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0), // 블러 강도 조정
-              child: Container(
-                color: Colors.black.withOpacity(0), // 투명한 배경
-              ),
+              filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+              child: Container(color: Colors.black.withOpacity(0)),
             ),
-            // 콘텐츠
             Column(
               children: [
-                // FoodButton과 FoodTip을 중앙 정렬
-                Center(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min, // 최소 크기로 Row 축소
-                    children: [SizedBox(width: 10), FoodTip()],
-                  ),
-                ),
+                Center(child: Row(children: [SizedBox(width: 10), FoodTip()])),
                 Expanded(
                   child: Stack(
                     children: [
                       Positioned(
-                        top:
-                            32, // This positions FoodMain 32px below FoodButton
+                        top: 32,
                         left: 0,
                         right: 0,
                         child: Center(child: FoodMain()),
@@ -60,8 +49,6 @@ class _PigfoodchangeState extends State<Pigfoodchange> {
                 ),
               ],
             ),
-
-            // 모달 (스크린 중앙에 띄울 작은 위젯)
           ],
         ),
       ),
@@ -71,7 +58,6 @@ class _PigfoodchangeState extends State<Pigfoodchange> {
   @override
   void initState() {
     super.initState();
-    // 화면 로드 시 모달 띄우기
     Future.delayed(Duration.zero, () {
       showDialog(
         context: context,
@@ -82,14 +68,14 @@ class _PigfoodchangeState extends State<Pigfoodchange> {
             content: Center(
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pop(context); // 모달 닫기
+                  Navigator.pop(context);
                 },
                 child: Material(
-                  color: Color(0xFFFE8295), // 배경 어두운 색
+                  color: Color(0xFFFE8295),
                   borderRadius: BorderRadius.circular(8),
                   child: Container(
-                    width: 300, // 모달 너비 변경
-                    height: 250, // 모달 높이 변경
+                    width: 300,
+                    height: 250,
                     padding: const EdgeInsets.symmetric(
                       vertical: 16,
                       horizontal: 32,
@@ -119,7 +105,7 @@ class _PigfoodchangeState extends State<Pigfoodchange> {
                         SizedBox(height: 16),
                         ElevatedButton(
                           onPressed: () {
-                            Navigator.pop(context); // 모달 닫기
+                            Navigator.pop(context);
                           },
                           child: Text(
                             '닫기',
@@ -161,15 +147,10 @@ class _FoodMainState extends State<FoodMain> {
         Container(
           width: 328,
           height: 74,
-          padding: const EdgeInsets.only(
-            bottom: 16,
-          ), // Add padding below to avoid clipping
+          padding: const EdgeInsets.only(bottom: 16),
           decoration: BoxDecoration(
             border: Border(
-              bottom: BorderSide(
-                width: 1,
-                color: Color(0xFFE6E6E6),
-              ), // Only bottom border
+              bottom: BorderSide(width: 1, color: Color(0xFFE6E6E6)),
             ),
           ),
           child: Row(
@@ -214,12 +195,9 @@ class _FoodMainState extends State<FoodMain> {
               SizedBox(height: 10),
               GestureDetector(
                 onTap: () {
-                  // 원하는 페이지로 이동, 예: 'FeedChangePage()'로 이동
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => Pigfoodchange(),
-                    ), // 'FeedChangePage()'는 이동할 페이지 클래스입니다
+                    MaterialPageRoute(builder: (context) => Pigfoodchange()),
                   );
                 },
                 child: Container(
@@ -330,10 +308,8 @@ class _NavbarState extends State<Navbar> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Home Button
                       GestureDetector(
                         onTap: () {
-                          // '홈' 클릭 시 HomePage로 이동
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -355,7 +331,7 @@ class _NavbarState extends State<Navbar> {
                                 child: SvgPicture.asset(
                                   'assets/images/gite.svg',
                                   color: Color(0xFFB3B3B3),
-                                ), // 로고 삽입
+                                ),
                               ),
                               const SizedBox(height: 4),
                               Text(
@@ -374,10 +350,8 @@ class _NavbarState extends State<Navbar> {
                         ),
                       ),
                       const SizedBox(width: 48),
-                      // Feeding Button
                       GestureDetector(
                         onTap: () {
-                          // '자동 급이' 클릭 시 FeedingPage로 이동
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => Pigfood()),
@@ -397,7 +371,7 @@ class _NavbarState extends State<Navbar> {
                                 child: SvgPicture.asset(
                                   'assets/images/pig_nose.svg',
                                   color: Color(0xFFFE8295),
-                                ), // 로고 삽입
+                                ),
                               ),
                               const SizedBox(height: 4),
                               Text(
@@ -417,10 +391,8 @@ class _NavbarState extends State<Navbar> {
                         ),
                       ),
                       const SizedBox(width: 48),
-                      // Profile Button
                       GestureDetector(
                         onTap: () {
-                          // '내 정보' 클릭 시 ProfilePage로 이동
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => Myhome()),
@@ -439,7 +411,7 @@ class _NavbarState extends State<Navbar> {
                                 decoration: BoxDecoration(),
                                 child: SvgPicture.asset(
                                   'assets/images/person.svg',
-                                ), // 로고 삽입
+                                ),
                               ),
                               const SizedBox(height: 4),
                               Text(
@@ -459,10 +431,8 @@ class _NavbarState extends State<Navbar> {
                         ),
                       ),
                       const SizedBox(width: 48),
-                      // Settings Button
                       GestureDetector(
                         onTap: () {
-                          // '설정' 클릭 시 SettingsPage로 이동
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -483,7 +453,7 @@ class _NavbarState extends State<Navbar> {
                                 decoration: BoxDecoration(),
                                 child: SvgPicture.asset(
                                   'assets/images/settings.svg',
-                                ), // 로고 삽입
+                                ),
                               ),
                               const SizedBox(height: 4),
                               Text(

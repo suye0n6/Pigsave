@@ -21,6 +21,9 @@ dependencies:
 
   flutter_email_sender: ^5.0.0
   firebase_database: ^11.3.5
+  get: ^4.6.6
+
+
 
 dev_dependencies:
   flutter_test:
@@ -51,5 +54,6 @@ flutter:
       fonts:
         - asset: assets/fonts/YOnepick-Bold.ttf
 
+        
   # Material 디자인을 사용 (기본 UI 디자인)
   uses-material-design: true

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:pigsave/screen/Home.dart';
-import 'package:pigsave/screen/Myhome.dart';
-import 'package:pigsave/screen/Pigfoodchange.dart';
-import 'package:pigsave/screen/setting.dart';
+import 'package:pigsave/screen/home/Home.dart';
+import 'package:pigsave/screen/mypage/Myhome.dart';
+import 'package:pigsave/screen/pig/Pigfoodchange.dart';
+import 'package:pigsave/screen/setting/setting.dart';
 
 class Pigfood extends StatefulWidget {
   const Pigfood({super.key});
@@ -114,7 +114,7 @@ class _FoodMainState extends State<FoodMain> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                height: 60,
+                height: 65,
                 child: Column(
                   children: [
                     Text(

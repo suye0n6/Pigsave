@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:ui'; // dart:ui 임포트
-import 'package:pigsave/screen/Home.dart';
-import 'package:pigsave/screen/Myhome.dart';
-import 'package:pigsave/screen/Pigfood.dart';
-import 'package:pigsave/screen/setting.dart';
+import 'package:pigsave/screen/home/Home.dart';
+import 'package:pigsave/screen/mypage/Myhome.dart';
+import 'package:pigsave/screen/pig/Pigfood.dart';
+import 'package:pigsave/screen/setting/setting.dart';
 
 class Pigfoodchange extends StatefulWidget {
   const Pigfoodchange({super.key});

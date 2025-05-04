@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:pigsave/screen/Home.dart';
-import 'package:pigsave/screen/PigQr.dart';
+import 'package:pigsave/screen/home/Home.dart';
+import 'package:pigsave/screen/pig/PigQr.dart';
 
 class PigMange extends StatefulWidget {
   const PigMange({super.key});

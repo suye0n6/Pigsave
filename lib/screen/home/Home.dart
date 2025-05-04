@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pigsave/screen/Myhome.dart';
-import 'package:pigsave/screen/PigManagement.dart';
-import 'package:pigsave/screen/PigQr.dart';
-import 'package:pigsave/screen/Pigfood.dart';
-import 'package:pigsave/screen/setting.dart';
+import 'package:pigsave/screen/mypage/Myhome.dart';
+import 'package:pigsave/screen/pig/PigManagement.dart';
+import 'package:pigsave/screen/pig/PigQr.dart';
+import 'package:pigsave/screen/pig/Pigfood.dart';
+import 'package:pigsave/screen/setting/setting.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

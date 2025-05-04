@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pigsave/screen/Home.dart';
-import 'package:pigsave/screen/Login.dart';
-import 'package:pigsave/screen/Pigfood.dart';
-import 'package:pigsave/screen/setting.dart';
+import 'package:pigsave/screen/home/Home.dart';
+import 'package:pigsave/screen/qr/Login.dart';
+import 'package:pigsave/screen/pig/Pigfood.dart';
+import 'package:pigsave/screen/setting/setting.dart';
 
 class Myhome extends StatefulWidget {
   const Myhome({super.key});

@@ -259,7 +259,7 @@ class _FoodMainState extends State<FoodMain> {
                     ),
                     const SizedBox(height: 12),
                     Text(
-                      '+&-나 직접 값을 입력하여\n급여량을 변경하세요(kg단위)',
+                      '+ & -나 직접 값을 입력하여\n급여량을 변경하세요(kg단위)',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Color(0xFF999999),

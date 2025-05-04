@@ -19,30 +19,34 @@ class _PigfoodState extends State<Pigfood> {
     return Scaffold(
       backgroundColor: const Color(0xFFF2F2F2),
       appBar: AppBar(backgroundColor: const Color(0xFFF2F2F2)),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: Stack(
-                children: [
-                  Positioned(top: 0, right: 20, child: FoodTip()),
-                  Positioned(
-                    top: 70,
-                    left: 0,
-                    right: 0,
-                    child: Center(child: FoodMain()),
+      body: Stack(
+        children: [
+          SafeArea(
+            child: Column(
+              children: [
+                Expanded(
+                  child: Stack(
+                    children: [
+                      Positioned(top: 0, right: 20, child: FoodTip()),
+                      Positioned(
+                        top: 70,
+                        left: 0,
+                        right: 0,
+                        child: Center(child: FoodMain()),
+                      ),
+                    ],
                   ),
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    child: SizedBox(child: Navbar()),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Navbar(), // ✅ 여기서 진짜 하단 고정
+          ),
+        ],
       ),
     );
   }

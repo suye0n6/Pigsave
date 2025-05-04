@@ -18,41 +18,40 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF2F2F2),
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 24),
-            Padding(
-              padding: const EdgeInsets.only(left: 16), // ✅ 왼쪽에 16px 여백 추가
-              child: Hometitle(), // 🟢 태그 인식 컨테이너
-            ),
-            SizedBox(height: 32),
-            Expanded(
-              // ✅ 빈 공간을 차지하여 overflow 방지
-              // 홈 바텀 위젯 오버플로우 수정
-              child: Stack(
+      body: Stack(
+        children: [
+          // ✅ SafeArea 포함한 메인 내용
+          Positioned.fill(
+            child: SafeArea(
+              child: Column(
                 children: [
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    child: HomeWeidget(),
+                  // 타이틀 영역 (왼쪽 정렬)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 24, left: 16),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Hometitle(),
+                    ),
                   ),
-                  Positioned(
-                    bottom: 0, // 화면의 하단에 고정
-                    left: 0,
-                    right: 0, // 가로로 꽉 차게
-                    child: SizedBox(
-                      child: Navbar(), // 하단 고정 Navbar
+                  SizedBox(height: 32),
+
+                  // 홈위젯 영역 (가운데 정렬)
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 100),
+                        child: Center(child: HomeWeidget()),
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+
+          // ✅ 하단 고정 Navbar
+          Positioned(left: 0, right: 0, bottom: 0, child: Navbar()),
+        ],
       ),
     );
   }

@@ -40,12 +40,7 @@ class _PigfoodState extends State<Pigfood> {
               ],
             ),
           ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Navbar(), // ✅ 여기서 진짜 하단 고정
-          ),
+          Positioned(bottom: 0, left: 0, right: 0, child: Navbar()),
         ],
       ),
     );
@@ -176,7 +171,6 @@ class _FoodMainState extends State<FoodMain> {
                       ),
                       child: Row(
                         children: [
-                          // - 버튼
                           GestureDetector(
                             onTap: () {
                               final newAmount = (foodAmount - 0.1).clamp(
@@ -193,7 +187,6 @@ class _FoodMainState extends State<FoodMain> {
                               child: SvgPicture.asset('assets/images/down.svg'),
                             ),
                           ),
-                          // 숫자 입력 필드
                           Expanded(
                             child: TextField(
                               controller: _controller,
@@ -224,7 +217,7 @@ class _FoodMainState extends State<FoodMain> {
                               left: 2,
                               bottom: 0,
                               right: 13,
-                            ), // ← 여기 왼쪽 padding 조정
+                            ),
                             child: Text(
                               'kg',
                               style: TextStyle(
@@ -237,7 +230,6 @@ class _FoodMainState extends State<FoodMain> {
                               ),
                             ),
                           ),
-                          // + 버튼
                           GestureDetector(
                             onTap: () {
                               final newAmount = (foodAmount + 0.1).clamp(
@@ -351,10 +343,8 @@ class _NavbarState extends State<Navbar> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Home Button
                       GestureDetector(
                         onTap: () {
-                          // '홈' 클릭 시 HomePage로 이동
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -376,7 +366,7 @@ class _NavbarState extends State<Navbar> {
                                 child: SvgPicture.asset(
                                   'assets/images/gite.svg',
                                   color: Color(0xFFB3B3B3),
-                                ), // 로고 삽입
+                                ),
                               ),
                               const SizedBox(height: 4),
                               Text(
@@ -395,10 +385,8 @@ class _NavbarState extends State<Navbar> {
                         ),
                       ),
                       const SizedBox(width: 48),
-                      // Feeding Button
                       GestureDetector(
                         onTap: () {
-                          // '자동 급이' 클릭 시 FeedingPage로 이동
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => Pigfood()),
@@ -418,7 +406,7 @@ class _NavbarState extends State<Navbar> {
                                 child: SvgPicture.asset(
                                   'assets/images/pig_nose.svg',
                                   color: Color(0xFFFE8295),
-                                ), // 로고 삽입
+                                ),
                               ),
                               const SizedBox(height: 4),
                               Text(
@@ -438,10 +426,8 @@ class _NavbarState extends State<Navbar> {
                         ),
                       ),
                       const SizedBox(width: 48),
-                      // Profile Button
                       GestureDetector(
                         onTap: () {
-                          // '내 정보' 클릭 시 ProfilePage로 이동
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => Myhome()),
@@ -460,7 +446,7 @@ class _NavbarState extends State<Navbar> {
                                 decoration: BoxDecoration(),
                                 child: SvgPicture.asset(
                                   'assets/images/person.svg',
-                                ), // 로고 삽입
+                                ),
                               ),
                               const SizedBox(height: 4),
                               Text(
@@ -480,10 +466,8 @@ class _NavbarState extends State<Navbar> {
                         ),
                       ),
                       const SizedBox(width: 48),
-                      // Settings Button
                       GestureDetector(
                         onTap: () {
-                          // '설정' 클릭 시 SettingsPage로 이동
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -504,7 +488,7 @@ class _NavbarState extends State<Navbar> {
                                 decoration: BoxDecoration(),
                                 child: SvgPicture.asset(
                                   'assets/images/settings.svg',
-                                ), // 로고 삽입
+                                ),
                               ),
                               const SizedBox(height: 4),
                               Text(

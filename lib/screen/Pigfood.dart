@@ -102,7 +102,7 @@ class _FoodMainState extends State<FoodMain> {
       children: [
         Container(
           width: 189,
-          height: 220,
+          height: 225,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
           decoration: ShapeDecoration(
             color: Colors.white,

@@ -508,7 +508,7 @@ class _HomeWeidgetState extends State<HomeWeidget> {
                                   child: SizedBox(
                                     width: double.infinity,
                                     child: Text(
-                                      '태그 인식',
+                                      '농장 태그',
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 20,
@@ -525,7 +525,7 @@ class _HomeWeidgetState extends State<HomeWeidget> {
                                   child: SizedBox(
                                     width: double.infinity,
                                     child: Text(
-                                      '모돈 정보 확인',
+                                      '농장 구역 설정',
                                       style: TextStyle(
                                         color: Color(0xFF8C8C8C),
                                         fontSize: 14,

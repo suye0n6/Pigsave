@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pigsave/screen/LoginJoin.dart'; // 회원가입 화면 import
+import 'package:pigsave/screen/qr/LoginJoin.dart'; // 회원가입 화면 import
 import 'package:pigsave/screen/home/Home.dart'; // 홈 화면 import
 
 class LoginScreen extends StatefulWidget {

@@ -5,6 +5,7 @@ import 'package:pigsave/screen/home/Home.dart';
 import 'package:pigsave/screen/mypage/Myhome.dart';
 import 'package:pigsave/screen/pig/Pigfoodchange.dart';
 import 'package:pigsave/screen/setting/setting.dart';
+import 'package:pigsave/widget/navbar.dart' as widget_navbar;
 
 class Pigfood extends StatefulWidget {
   const Pigfood({super.key});
@@ -40,7 +41,12 @@ class _PigfoodState extends State<Pigfood> {
               ],
             ),
           ),
-          Positioned(bottom: 0, left: 0, right: 0, child: Navbar()),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: widget_navbar.Navbar(),
+          ),
         ],
       ),
     );
@@ -297,218 +303,6 @@ class _FoodTipState extends State<FoodTip> {
                   width: 28,
                   height: 28,
                   child: SvgPicture.asset('assets/images/info.svg'),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class Navbar extends StatefulWidget {
-  const Navbar({super.key});
-
-  @override
-  State<Navbar> createState() => _NavbarState();
-}
-
-class _NavbarState extends State<Navbar> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: 360,
-          height: 72,
-          clipBehavior: Clip.antiAlias,
-          decoration: ShapeDecoration(
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(16),
-                topRight: Radius.circular(16),
-              ),
-            ),
-          ),
-          child: Stack(
-            children: [
-              Positioned(
-                left: 32,
-                top: 4,
-                child: Container(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => HomeScreen(),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 30,
-                                height: 30,
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(),
-                                child: SvgPicture.asset(
-                                  'assets/images/gite.svg',
-                                  color: Color(0xFFB3B3B3),
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                '홈',
-                                style: TextStyle(
-                                  color: Color(0xFFB3B3B3),
-                                  fontSize: 14,
-                                  fontFamily: 'Pretendard',
-                                  fontWeight: FontWeight.w600,
-                                  height: 1.20,
-                                  letterSpacing: -0.14,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 48),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Pigfood()),
-                          );
-                        },
-                        child: Container(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 30,
-                                height: 30,
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(),
-                                child: SvgPicture.asset(
-                                  'assets/images/pig_nose.svg',
-                                  color: Color(0xFFFE8295),
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                '자동 급이',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0xFFFE8295),
-                                  fontSize: 14,
-                                  fontFamily: 'Pretendard',
-                                  fontWeight: FontWeight.w600,
-                                  height: 1.20,
-                                  letterSpacing: -0.14,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 48),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Myhome()),
-                          );
-                        },
-                        child: Container(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 30,
-                                height: 30,
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(),
-                                child: SvgPicture.asset(
-                                  'assets/images/person.svg',
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                '내 정보',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0xFFB3B3B3),
-                                  fontSize: 14,
-                                  fontFamily: 'Pretendard',
-                                  fontWeight: FontWeight.w600,
-                                  height: 1.20,
-                                  letterSpacing: -0.14,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 48),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SettingPage(),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 30,
-                                height: 30,
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(),
-                                child: SvgPicture.asset(
-                                  'assets/images/settings.svg',
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                '설정',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0xFFB3B3B3),
-                                  fontSize: 14,
-                                  fontFamily: 'Pretendard',
-                                  fontWeight: FontWeight.w600,
-                                  height: 1.20,
-                                  letterSpacing: -0.14,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
               ),
             ],

@@ -172,7 +172,7 @@ class Mantemp extends StatelessWidget {
             ],
           ),
           Text(
-            tempState ? '적절' : '비정상',
+            tempState ? '정상' : '비정상',
             style: TextStyle(
               color: tempState ? Color(0xFF12E143) : Colors.red,
               fontSize: 16,
@@ -254,7 +254,7 @@ class Manheart extends StatelessWidget {
             ],
           ),
           Text(
-            bpmState ? '적절' : '비정상',
+            bpmState ? '정상' : '비정상',
             style: TextStyle(
               color: bpmState ? Color(0xFF12E143) : Colors.red,
               fontSize: 16,

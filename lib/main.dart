@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'screen/qr/Login.dart';
-import 'firebase_options.dart';
+import 'service/firebase_options.dart';
 import 'package:pigsave/controller/navbar_controller.dart';
 
 void main() async {

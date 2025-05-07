@@ -35,12 +35,12 @@ class SettingPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 32),
+                  SizedBox(height: 40),
                   Expanded(
                     child: SingleChildScrollView(
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: 100),
-                        child: Center(),
+                        child: options(),
                       ),
                     ),
                   ),
@@ -56,6 +56,170 @@ class SettingPage extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class options extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          width: 328,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 12,
+            children: [
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.only(bottom: 12),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  spacing: 4,
+                  children: [
+                    Container(
+                      width: 24,
+                      height: 24,
+                      child: Image.asset(
+                        'assets/images/profile.png', // 👉 여기에 원하는 이미지 경로
+                        fit: BoxFit.cover, // 또는 contain, fill 등 조정 가능
+                      ),
+                    ),
+                    Text(
+                      '비밀번호 변경',
+                      style: TextStyle(
+                        color: const Color(0xFF333333),
+                        fontSize: 18,
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w700,
+                        height: 1.40,
+                        letterSpacing: -0.36,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.only(bottom: 12),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  spacing: 4,
+                  children: [
+                    Container(
+                      width: 24,
+                      height: 24,
+                      decoration: BoxDecoration(color: const Color(0xFFD9D9D9)),
+                    ),
+                    Text(
+                      '알림',
+                      style: TextStyle(
+                        color: const Color(0xFF333333),
+                        fontSize: 18,
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w700,
+                        height: 1.40,
+                        letterSpacing: -0.36,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.only(bottom: 12),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  spacing: 4,
+                  children: [
+                    Container(
+                      width: 24,
+                      height: 24,
+                      decoration: BoxDecoration(color: const Color(0xFFD9D9D9)),
+                    ),
+                    Text(
+                      '위치 정보',
+                      style: TextStyle(
+                        color: const Color(0xFF333333),
+                        fontSize: 18,
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w700,
+                        height: 1.40,
+                        letterSpacing: -0.36,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.only(bottom: 12),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  spacing: 4,
+                  children: [
+                    Container(
+                      width: 24,
+                      height: 24,
+                      decoration: BoxDecoration(color: const Color(0xFFD9D9D9)),
+                    ),
+                    Text(
+                      '화면',
+                      style: TextStyle(
+                        color: const Color(0xFF333333),
+                        fontSize: 18,
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w700,
+                        height: 1.40,
+                        letterSpacing: -0.36,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.only(bottom: 12),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  spacing: 4,
+                  children: [
+                    Container(
+                      width: 24,
+                      height: 24,
+                      decoration: BoxDecoration(color: const Color(0xFFD9D9D9)),
+                    ),
+                    Text(
+                      '기타',
+                      style: TextStyle(
+                        color: const Color(0xFF333333),
+                        fontSize: 18,
+                        fontFamily: 'Pretendard',
+                        fontWeight: FontWeight.w700,
+                        height: 1.40,
+                        letterSpacing: -0.36,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

@@ -38,12 +38,7 @@ class _PigfoodchangeState extends State<Pigfoodchange> {
                         right: 0,
                         child: Center(child: FoodMain()),
                       ),
-                      Positioned(
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        child: SizedBox(child: Navbar()),
-                      ),
+                      Positioned(bottom: 0, left: 0, right: 0, child: Navbar()),
                     ],
                   ),
                 ),

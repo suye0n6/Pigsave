@@ -24,22 +24,15 @@ class SettingPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 24),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16),
-                    child: Text(
-                      '설정',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
                   SizedBox(height: 40),
                   Expanded(
                     child: SingleChildScrollView(
                       child: Padding(
-                        padding: const EdgeInsets.only(bottom: 100),
+                        padding: const EdgeInsets.only(
+                          bottom: 0,
+                          left: 20,
+                          top: 0,
+                        ),
                         child: options(),
                       ),
                     ),
@@ -82,12 +75,12 @@ class options extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   spacing: 4,
                   children: [
-                    Container(
+                    SizedBox(
                       width: 24,
                       height: 24,
-                      child: Image.asset(
-                        'assets/images/profile.png', // 👉 여기에 원하는 이미지 경로
-                        fit: BoxFit.cover, // 또는 contain, fill 등 조정 가능
+                      child: SvgPicture.asset(
+                        'assets/images/lock.svg',
+                        fit: BoxFit.contain,
                       ),
                     ),
                     Text(
@@ -113,10 +106,13 @@ class options extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   spacing: 4,
                   children: [
-                    Container(
+                    SizedBox(
                       width: 24,
                       height: 24,
-                      decoration: BoxDecoration(color: const Color(0xFFD9D9D9)),
+                      child: SvgPicture.asset(
+                        'assets/images/notifications.svg',
+                        fit: BoxFit.contain,
+                      ),
                     ),
                     Text(
                       '알림',
@@ -141,10 +137,13 @@ class options extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   spacing: 4,
                   children: [
-                    Container(
+                    SizedBox(
                       width: 24,
                       height: 24,
-                      decoration: BoxDecoration(color: const Color(0xFFD9D9D9)),
+                      child: SvgPicture.asset(
+                        'assets/images/distance.svg',
+                        fit: BoxFit.contain,
+                      ),
                     ),
                     Text(
                       '위치 정보',
@@ -169,10 +168,13 @@ class options extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   spacing: 4,
                   children: [
-                    Container(
+                    SizedBox(
                       width: 24,
                       height: 24,
-                      decoration: BoxDecoration(color: const Color(0xFFD9D9D9)),
+                      child: SvgPicture.asset(
+                        'assets/images/broken_image.svg',
+                        fit: BoxFit.contain,
+                      ),
                     ),
                     Text(
                       '화면',
@@ -197,10 +199,13 @@ class options extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   spacing: 4,
                   children: [
-                    Container(
+                    SizedBox(
                       width: 24,
                       height: 24,
-                      decoration: BoxDecoration(color: const Color(0xFFD9D9D9)),
+                      child: SvgPicture.asset(
+                        'assets/images/more_horiz.svg',
+                        fit: BoxFit.contain,
+                      ),
                     ),
                     Text(
                       '기타',

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pigsave/screen/qr/LoginJoin.dart'; // 회원가입 화면 import
-import 'package:pigsave/screen/home/Home.dart'; // 홈 화면 import
+import 'package:pigsave/screen/home/Home.dart';
+import 'package:pigsave/widget/input_text_field.dart'; // 홈 화면 import
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -102,7 +103,11 @@ class _LoginBoxState extends State<LoginBox> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           // 이메일 입력 필드
-          _buildTextField('이메일', '이메일을 입력해주세요', _emailController),
+          InputTextField(
+            label: '이메일',
+            hintText: '이메일을 입력해주새요',
+            controller: _emailController,
+          ),
           const SizedBox(height: 10),
 
           // 비밀번호 입력 필드

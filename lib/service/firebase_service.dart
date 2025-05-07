@@ -27,10 +27,4 @@ class FirebaseService {
   User? getCurrentUser() {
     return _auth.currentUser;
   }
-
-  /// 실시간 데이터 읽기 예시 (예: monitoring → 건강 정보)
-  DatabaseReference get monitoringRef => _database.ref('monitoring');
-
-  /// 실시간 데이터 읽기 예시 (예: food → 급이 정보)
-  DatabaseReference get foodRef => _database.ref('food');
 }

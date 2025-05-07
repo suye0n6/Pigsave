@@ -5,6 +5,7 @@ import 'package:pigsave/screen/pig/PigManagement.dart';
 import 'package:pigsave/screen/pig/PigQr.dart';
 import 'package:pigsave/screen/pig/Pigfood.dart';
 import 'package:pigsave/screen/setting/setting.dart';
+import 'package:pigsave/widget/navbar.dart' as widget_navbar;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -50,7 +51,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
 
           // ✅ 하단 고정 Navbar
-          Positioned(left: 0, right: 0, bottom: 0, child: Navbar()),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: widget_navbar.Navbar(),
+          ),
         ],
       ),
     );

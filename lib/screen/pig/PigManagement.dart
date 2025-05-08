@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:pigsave/screen/home/Home.dart';
 import 'package:pigsave/screen/pig/PigQr.dart';
 
 class PigMange extends StatefulWidget {
@@ -48,35 +47,28 @@ class _PigMangeState extends State<PigMange> {
     return Scaffold(
       backgroundColor: const Color(0xFFF2F2F2),
       appBar: AppBar(backgroundColor: const Color(0xFFF2F2F2)),
-      body: Stack(
-        children: [
-          Center(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 30),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 14),
-                  child: Mantitle(uid: cardUid),
+                Mantitle(uid: cardUid),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    Mantemp(temp: temp, tempState: tempState),
+                    const SizedBox(width: 16),
+                    Manheart(bpm: bpm, bpmState: bpmState),
+                  ],
                 ),
+                const SizedBox(height: 16),
+                Manair(breath: breath, breathState: breathState),
               ],
             ),
           ),
-          Positioned(
-            top: 14 + 56 + 20,
-            left: 30,
-            child: Mantemp(temp: temp, tempState: tempState),
-          ),
-          Positioned(
-            top: 14 + 56 + 20,
-            left: 30 + 157 + 16,
-            child: Manheart(bpm: bpm, bpmState: bpmState),
-          ),
-          Positioned(
-            top: 14 + 56 + 180,
-            left: 30,
-            child: Manair(breath: breath, breathState: breathState),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -335,7 +327,13 @@ class Manair extends StatelessWidget {
               ),
             ],
           ),
-          Text('정상', style: TextStyle(color: Color(0xFF1BD446), fontSize: 16)),
+          Text(
+            breathState ? '정상' : '비정상',
+            style: TextStyle(
+              color: breathState ? Color(0xFF12E143) : Colors.red,
+              fontSize: 16,
+            ),
+          ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -373,132 +371,4 @@ class Manair extends StatelessWidget {
           ),
     );
   }
-}
-
-// 모달 창을 띄우는 함수
-void _showInfoDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return Dialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        child: Container(
-          width: 195,
-          height: 237,
-          padding: const EdgeInsets.only(
-            top: 20,
-            left: 12,
-            right: 12,
-            bottom: 14,
-          ),
-          clipBehavior: Clip.antiAlias,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                width: double.infinity,
-                height: 138,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: double.infinity,
-                      child: Text(
-                        '돼지의 적정 분당 호흡수는?',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Color(0xFF1A1A1A),
-                          fontSize: 18,
-                          fontFamily: 'Pretendard',
-                          fontWeight: FontWeight.w700,
-                          height: 1.40,
-                          letterSpacing: -0.36,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 45),
-                    SizedBox(
-                      width: double.infinity,
-                      child: Text(
-                        '일반적으로 정상 환경조건에서 큰 돼지는 보통 분당 20회 정도, 작은 돼지는 분당 30~40회 정도가 입니다.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Color(0xFF7F7F7F),
-                          fontSize: 14,
-                          fontFamily: 'Pretendard',
-                          fontWeight: FontWeight.w400,
-                          height: 1.40,
-                          letterSpacing: -0.14,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 32),
-              Container(
-                width: 171,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context); // "닫기" 버튼 클릭 시 다이얼로그 닫기
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 28,
-                            vertical: 8,
-                          ),
-                          decoration: ShapeDecoration(
-                            color: Color(0xFFE6E6E6),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 28,
-                                child: Text(
-                                  '닫기',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Color(0xFF666666),
-                                    fontSize: 14,
-                                    fontFamily: 'Pretendard',
-                                    fontWeight: FontWeight.w600,
-                                    height: 1.20,
-                                    letterSpacing: -0.14,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    },
-  );
 }

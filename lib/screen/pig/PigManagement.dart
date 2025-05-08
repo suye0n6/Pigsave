@@ -49,24 +49,24 @@ class _PigMangeState extends State<PigMange> {
       appBar: AppBar(backgroundColor: const Color(0xFFF2F2F2)),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 30),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Mantitle(uid: cardUid),
-                const SizedBox(height: 20),
-                Row(
-                  children: [
-                    Mantemp(temp: temp, tempState: tempState),
-                    const SizedBox(width: 16),
-                    Manheart(bpm: bpm, bpmState: bpmState),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                Manair(breath: breath, breathState: breathState),
-              ],
-            ),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              const SizedBox(height: 14),
+              Mantitle(uid: cardUid),
+              const SizedBox(height: 24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Mantemp(temp: temp, tempState: tempState),
+                  const SizedBox(width: 16),
+                  Manheart(bpm: bpm, bpmState: bpmState),
+                ],
+              ),
+              const SizedBox(height: 16),
+              Manair(breath: breath, breathState: breathState),
+              const SizedBox(height: 24),
+            ],
           ),
         ),
       ),

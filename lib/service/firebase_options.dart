@@ -53,8 +53,11 @@ class DefaultFirebaseOptions {
     messagingSenderId: '728399425211',
     projectId: 'pigsave-c4738',
     authDomain: 'pigsave-c4738.firebaseapp.com',
-    storageBucket: 'pigsave-c4738.firebasestorage.app',
+    storageBucket: 'pigsave-c4738.appspot.com', // ← 오타도 수정함
     measurementId: 'G-22NWVEV5WT',
+
+    // 🔥 이 줄을 꼭 추가!
+    databaseURL: 'https://pigsave-c4738-default-rtdb.firebaseio.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(

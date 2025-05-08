@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'screen/qr/Login.dart';
 import 'service/firebase_options.dart';
 import 'package:pigsave/controller/navbar_controller.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,6 +43,9 @@ class _ControlState extends State<Control> {
   @override
   void initState() {
     super.initState();
+
+    final ref = FirebaseDatabase.instance.ref('test');
+    ref.set({'check': 'ok'});
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Navigator.pushReplacement(

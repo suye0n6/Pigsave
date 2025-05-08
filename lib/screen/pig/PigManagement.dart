@@ -28,6 +28,7 @@ class _PigMangeState extends State<PigMange> {
     super.initState();
     _monitoringRef.onValue.listen((event) {
       final data = event.snapshot.value as Map?;
+      print("🔥 데이터 수신됨: $data");
       if (data != null) {
         setState(() {
           cardUid = data['card_uid'] ?? '';
